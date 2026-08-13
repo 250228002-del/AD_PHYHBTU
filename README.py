@@ -1,5 +1,4 @@
 import streamlit as st
-import tkinter as tk
 from tkinter import ttk
 
 # ============================================================
@@ -36,7 +35,6 @@ UNITS = {
             "kilodyne (kdyne)": 0.01,
         },
     },
-
     "Energy": {
         "SI": {
             "Joule (J)": 1.0,
