@@ -1,1080 +1,973 @@
-import streamlit as st
-from tkinter import ttk
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit Converter</title>
 
-# ============================================================
-# UNIT CONVERTER - SI / CGS
-# ============================================================
+<style>
+* {
+    box-sizing: border-box;
+}
 
-BG = "#ffffff"
-BLUE = "#2f55b7"
-LIGHT_BLUE = "#f8faff"
-BORDER_BLUE = "#dbe4fb"
-GREEN = "#3d9b59"
-LIGHT_GREEN = "#f7fcf8"
-BORDER_GREEN = "#d8efdf"
-TEXT = "#111111"
-ARROW = "#333333"
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+    color: #111;
+}
+
+/* Header */
+.header {
+    height: 125px;
+    background: linear-gradient(135deg, #3159b7, #294fa9);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+}
+
+.menu {
+    font-size: 42px;
+    cursor: pointer;
+}
+
+.title {
+    font-size: 42px;
+    font-weight: bold;
+}
+
+.star {
+    font-size: 52px;
+    cursor: pointer;
+}
+
+/* Main */
+.container {
+    width: 92%;
+    max-width: 1000px;
+    margin: 45px auto;
+}
+
+/* Cards */
+.card {
+    background: #f9faff;
+    border: 1px solid #dce2ee;
+    border-radius: 18px;
+    padding: 28px;
+    margin-bottom: 28px;
+}
+
+.card.answer-card {
+    background: #f2faf5;
+    border-color: #cfe7d7;
+}
+
+.heading {
+    color: #3159b7;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+.answer-heading {
+    color: #4d9568;
+}
+
+/* Inputs */
+select,
+input {
+    width: 100%;
+    height: 70px;
+    border: 1px solid #bfc2c8;
+    border-radius: 14px;
+    background: white;
+    padding: 0 25px;
+    font-size: 23px;
+    outline: none;
+}
+
+select:focus,
+input:focus {
+    border: 2px solid #3159b7;
+}
+
+/* Value row */
+.value-row,
+.answer-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.convert-btn {
+    background: #3159b7;
+    color: white;
+}
+
+.swap-btn {
+    background: white;
+    color: #3159b7;
+    border: 1px solid #3159b7;
+}
+
+.clear-btn {
+    background: white;
+    color: #555;
+    border: 1px solid #aaa;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+.status {
+    margin-top: 15px;
+    color: #666;
+    font-size: 15px;
+}
+
+/* Mobile */
+@media (max-width: 700px) {
+
+    .header {
+        height: 90px;
+        padding: 0 20px;
+    }
+
+    .menu {
+        font-size: 30px;
+    }
+
+    .title {
+        font-size: 25px;
+    }
+
+    .star {
+        font-size: 35px;
+    }
+
+    .container {
+        width: 94%;
+        margin-top: 25px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .heading {
+        font-size: 22px;
+    }
+
+    .value-row,
+    .answer-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    select,
+    input {
+        height: 60px;
+        font-size: 18px;
+    }
+
+    .buttons {
+        flex-wrap: wrap;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Header -->
+<div class="header">
+
+    <div class="menu">☰</div>
+
+    <div class="title">
+        Unit Converter
+    </div>
+
+    <div class="star" onclick="toggleFavorite()">
+        ☆
+    </div>
+
+</div>
 
 
-# ============================================================
-# CONVERSION DATA
-# ============================================================
+<div class="container">
 
-# Conversion factors are relative to the SI base unit
-UNITS = {
+    <!-- 1 -->
+    <div class="card">
 
-    "Force": {
-        "SI": {
-            "Newton (N)": 1.0,
-            "Kilonewton (kN)": 1000.0,
-            "Meganewton (MN)": 1000000.0,
+        <div class="heading">
+            1. Convert in
+        </div>
+
+        <select id="system">
+            <option value="SI">SI</option>
+            <option value="CGS" selected>CGS</option>
+        </select>
+
+    </div>
+
+
+    <!-- 2 -->
+    <div class="card">
+
+        <div class="heading">
+            2. Physical Quantity
+        </div>
+
+        <select id="quantity">
+            <option value="Length">Length</option>
+            <option value="Mass">Mass</option>
+            <option value="Time">Time</option>
+            <option value="Area">Area</option>
+            <option value="Volume">Volume</option>
+            <option value="Speed">Speed</option>
+            <option value="Acceleration">Acceleration</option>
+            <option value="Force" selected>Force</option>
+            <option value="Pressure">Pressure</option>
+            <option value="Energy">Energy / Work</option>
+            <option value="Power">Power</option>
+            <option value="Frequency">Frequency</option>
+            <option value="Density">Density</option>
+            <option value="Momentum">Momentum</option>
+            <option value="Charge">Electric Charge</option>
+            <option value="Voltage">Voltage</option>
+            <option value="Resistance">Resistance</option>
+            <option value="Capacitance">Capacitance</option>
+            <option value="Temperature">Temperature</option>
+        </select>
+
+    </div>
+
+
+    <!-- 3 -->
+    <div class="card">
+
+        <div class="heading">
+            3. Enter value
+        </div>
+
+        <div class="value-row">
+
+            <input
+                type="number"
+                id="value"
+                value="50"
+                placeholder="Enter value"
+            >
+
+            <select id="fromUnit"></select>
+
+        </div>
+
+    </div>
+
+
+    <!-- 4 -->
+    <div class="card answer-card">
+
+        <div class="heading answer-heading">
+            4. Your answer
+        </div>
+
+        <div class="answer-row">
+
+            <input
+                type="text"
+                id="answer"
+                value="5.0 × 10⁶"
+                readonly
+            >
+
+            <select id="toUnit"></select>
+
+        </div>
+
+        <div class="status" id="status">
+            Ready
+        </div>
+
+    </div>
+
+
+    <!-- Buttons -->
+    <div class="buttons">
+
+        <button class="convert-btn" onclick="convert()">
+            Convert
+        </button>
+
+        <button class="swap-btn" onclick="swapUnits()">
+            ⇄ Swap
+        </button>
+
+        <button class="clear-btn" onclick="clearValue()">
+            Clear
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+/*
+=========================================================
+UNIT DATABASE
+factor = value of one unit in SI base unit
+=========================================================
+*/
+
+const units = {
+
+    Length: {
+
+        SI: {
+            "Meter (m)": 1,
+            "Kilometer (km)": 1000,
+            "Centimeter (cm)": 0.01,
+            "Millimeter (mm)": 0.001,
+            "Micrometer (µm)": 0.000001
         },
 
-        "CGS": {
-            "dyne (dyn)": 0.00001,
-            "kilodyne (kdyne)": 0.01,
-        },
+        CGS: {
+            "Centimeter (cm)": 1,
+            "Millimeter (mm)": 0.1,
+            "Meter (m)": 100,
+            "Micrometer (µm)": 0.0001
+        }
     },
-    "Energy": {
-        "SI": {
-            "Joule (J)": 1.0,
-            "Kilojoule (kJ)": 1000.0,
-            "Megajoule (MJ)": 1000000.0,
+
+
+    Mass: {
+
+        SI: {
+            "Kilogram (kg)": 1,
+            "Gram (g)": 0.001,
+            "Milligram (mg)": 0.000001,
+            "Tonne (t)": 1000
         },
 
-        "CGS": {
-            "erg (erg)": 0.0000001,
-            "kilerg (kerg)": 0.0001,
-        },
+        CGS: {
+            "Gram (g)": 1,
+            "Kilogram (kg)": 1000,
+            "Milligram (mg)": 0.001
+        }
     },
 
-    "Power": {
-        "SI": {
-            "Watt (W)": 1.0,
-            "Kilowatt (kW)": 1000.0,
-            "Megawatt (MW)": 1000000.0,
+
+    Time: {
+
+        SI: {
+            "Second (s)": 1,
+            "Millisecond (ms)": 0.001,
+            "Minute (min)": 60,
+            "Hour (h)": 3600,
+            "Day (day)": 86400
         },
 
-        "CGS": {
-            "erg/second (erg/s)": 0.0000001,
-        },
+        CGS: {
+            "Second (s)": 1,
+            "Millisecond (ms)": 0.001,
+            "Minute (min)": 60,
+            "Hour (h)": 3600
+        }
     },
 
-    "Pressure": {
-        "SI": {
-            "Pascal (Pa)": 1.0,
-            "Kilopascal (kPa)": 1000.0,
-            "Megapascal (MPa)": 1000000.0,
+
+    Area: {
+
+        SI: {
+            "Square meter (m²)": 1,
+            "Square kilometer (km²)": 1000000,
+            "Square centimeter (cm²)": 0.0001,
+            "Square millimeter (mm²)": 0.000001
         },
 
-        "CGS": {
-            "barye (Ba)": 0.1,
-            "kilobarye (kBa)": 100.0,
-        },
+        CGS: {
+            "Square centimeter (cm²)": 1,
+            "Square meter (m²)": 10000,
+            "Square millimeter (mm²)": 0.01
+        }
     },
 
-    "Length": {
-        "SI": {
-            "meter (m)": 1.0,
-            "kilometer (km)": 1000.0,
-            "centimeter (cm)": 0.01,
-            "millimeter (mm)": 0.001,
+
+    Volume: {
+
+        SI: {
+            "Cubic meter (m³)": 1,
+            "Liter (L)": 0.001,
+            "Milliliter (mL)": 0.000001,
+            "Cubic centimeter (cm³)": 0.000001
         },
 
-        "CGS": {
-            "centimeter (cm)": 0.01,
-            "meter (m)": 1.0,
-            "millimeter (mm)": 0.001,
-        },
+        CGS: {
+            "Cubic centimeter (cm³)": 1,
+            "Milliliter (mL)": 1,
+            "Cubic meter (m³)": 1000000
+        }
     },
 
-    "Mass": {
-        "SI": {
-            "kilogram (kg)": 1.0,
-            "gram (g)": 0.001,
-            "milligram (mg)": 0.000001,
+
+    Speed: {
+
+        SI: {
+            "Meter/second (m/s)": 1,
+            "Kilometer/hour (km/h)": 1000 / 3600
         },
 
-        "CGS": {
-            "gram (g)": 0.001,
-            "milligram (mg)": 0.000001,
-            "kilogram (kg)": 1.0,
-        },
+        CGS: {
+            "Centimeter/second (cm/s)": 1,
+            "Meter/second (m/s)": 100,
+            "Kilometer/hour (km/h)": 100000 / 3600
+        }
     },
 
-    "Time": {
-        "SI": {
-            "second (s)": 1.0,
-            "minute (min)": 60.0,
-            "hour (h)": 3600.0,
+
+    Acceleration: {
+
+        SI: {
+            "Meter/second² (m/s²)": 1,
+            "Centimeter/second² (cm/s²)": 0.01
         },
 
-        "CGS": {
-            "second (s)": 1.0,
-            "minute (min)": 60.0,
-            "hour (h)": 3600.0,
-        },
+        CGS: {
+            "Centimeter/second² (cm/s²)": 1,
+            "Meter/second² (m/s²)": 100,
+            "Gal (Gal)": 1
+        }
     },
 
-    "Velocity": {
-        "SI": {
-            "meter/second (m/s)": 1.0,
-            "kilometer/hour (km/h)": 1000 / 3600,
+
+    Force: {
+
+        SI: {
+            "Newton (N)": 1,
+            "Kilonewton (kN)": 1000,
+            "Millinewton (mN)": 0.001
         },
 
-        "CGS": {
-            "centimeter/second (cm/s)": 0.01,
-            "meter/second (m/s)": 1.0,
-        },
+        CGS: {
+            "Dyne (dyn)": 0.00001,
+            "Newton (N)": 100000,
+            "Kilodyne (kdyne)": 0.01
+        }
     },
 
-    "Acceleration": {
-        "SI": {
-            "meter/second² (m/s²)": 1.0,
-            "kilometer/second² (km/s²)": 1000.0,
+
+    Pressure: {
+
+        SI: {
+            "Pascal (Pa)": 1,
+            "Kilopascal (kPa)": 1000,
+            "Megapascal (MPa)": 1000000,
+            "Bar (bar)": 100000,
+            "Atmosphere (atm)": 101325
         },
 
-        "CGS": {
-            "centimeter/second² (cm/s²)": 0.01,
-            "meter/second² (m/s²)": 1.0,
-        },
+        CGS: {
+            "Barye (Ba)": 0.1,
+            "Dyne/cm² (dyn/cm²)": 0.1,
+            "Pascal (Pa)": 10
+        }
     },
 
-    "Momentum": {
-        "SI": {
-            "kilogram meter/second (kg·m/s)": 1.0,
+
+    Energy: {
+
+        SI: {
+            "Joule (J)": 1,
+            "Kilojoule (kJ)": 1000,
+            "Watt-hour (Wh)": 3600,
+            "Kilowatt-hour (kWh)": 3600000
         },
 
-        "CGS": {
-            "gram centimeter/second (g·cm/s)": 0.00001,
-        },
+        CGS: {
+            "Erg (erg)": 0.0000001,
+            "Joule (J)": 10000000
+        }
     },
 
-    "Density": {
-        "SI": {
-            "kilogram/meter³ (kg/m³)": 1.0,
-            "gram/meter³ (g/m³)": 0.001,
+
+    Power: {
+
+        SI: {
+            "Watt (W)": 1,
+            "Kilowatt (kW)": 1000,
+            "Megawatt (MW)": 1000000
         },
 
-        "CGS": {
-            "gram/centimeter³ (g/cm³)": 1000.0,
-            "kilogram/meter³ (kg/m³)": 1.0,
-        },
+        CGS: {
+            "Erg/second (erg/s)": 0.0000001,
+            "Watt (W)": 10000000
+        }
     },
+
+
+    Frequency: {
+
+        SI: {
+            "Hertz (Hz)": 1,
+            "Kilohertz (kHz)": 1000,
+            "Megahertz (MHz)": 1000000,
+            "Gigahertz (GHz)": 1000000000
+        },
+
+        CGS: {
+            "Hertz (Hz)": 1,
+            "Kilohertz (kHz)": 1000,
+            "Megahertz (MHz)": 1000000
+        }
+    },
+
+
+    Density: {
+
+        SI: {
+            "Kilogram/m³ (kg/m³)": 1,
+            "Gram/cm³ (g/cm³)": 1000,
+            "Gram/liter (g/L)": 1
+        },
+
+        CGS: {
+            "Gram/cm³ (g/cm³)": 1,
+            "Kilogram/m³ (kg/m³)": 0.001,
+            "Gram/liter (g/L)": 0.001
+        }
+    },
+
+
+    Momentum: {
+
+        SI: {
+            "kg·m/s": 1,
+            "g·cm/s": 0.00001
+        },
+
+        CGS: {
+            "g·cm/s": 1,
+            "kg·m/s": 100000
+        }
+    },
+
+
+    "Charge": {
+
+        SI: {
+            "Coulomb (C)": 1,
+            "Millicoulomb (mC)": 0.001,
+            "Microcoulomb (µC)": 0.000001,
+            "Nanocoulomb (nC)": 0.000000001
+        },
+
+        CGS: {
+            "Coulomb (C)": 1,
+            "Statcoulomb (statC)": 2997924580
+        }
+    },
+
+
+    Voltage: {
+
+        SI: {
+            "Volt (V)": 1,
+            "Millivolt (mV)": 0.001,
+            "Kilovolt (kV)": 1000
+        },
+
+        CGS: {
+            "Volt (V)": 1,
+            "Millivolt (mV)": 0.001
+        }
+    },
+
+
+    Resistance: {
+
+        SI: {
+            "Ohm (Ω)": 1,
+            "Kiloohm (kΩ)": 1000,
+            "Megaohm (MΩ)": 1000000
+        },
+
+        CGS: {
+            "Ohm (Ω)": 1,
+            "Kiloohm (kΩ)": 1000
+        }
+    },
+
+
+    Capacitance: {
+
+        SI: {
+            "Farad (F)": 1,
+            "Microfarad (µF)": 0.000001,
+            "Nanofarad (nF)": 0.000000001,
+            "Picofarad (pF)": 0.000000000001
+        },
+
+        CGS: {
+            "Farad (F)": 1,
+            "Microfarad (µF)": 0.000001,
+            "Nanofarad (nF)": 0.000000001
+        }
+    },
+
+
+    Temperature: {
+
+        SI: {
+            "Kelvin (K)": 1,
+            "Celsius (°C)": 1
+        },
+
+        CGS: {
+            "Celsius (°C)": 1,
+            "Kelvin (K)": 1,
+            "Fahrenheit (°F)": 1
+        }
+    }
+
+};
+
+
+/*
+=========================================================
+ELEMENTS
+=========================================================
+*/
+
+const systemSelect = document.getElementById("system");
+const quantitySelect = document.getElementById("quantity");
+const valueInput = document.getElementById("value");
+const fromUnit = document.getElementById("fromUnit");
+const toUnit = document.getElementById("toUnit");
+const answer = document.getElementById("answer");
+const statusText = document.getElementById("status");
+
+
+/*
+=========================================================
+UPDATE UNITS
+=========================================================
+*/
+
+function updateUnits() {
+
+    const system = systemSelect.value;
+    const quantity = quantitySelect.value;
+
+    const list = units[quantity][system];
+
+    fromUnit.innerHTML = "";
+    toUnit.innerHTML = "";
+
+    const unitNames = Object.keys(list);
+
+    unitNames.forEach((unit, index) => {
+
+        const option1 = document.createElement("option");
+        option1.value = unit;
+        option1.textContent = unit;
+
+        const option2 = document.createElement("option");
+        option2.value = unit;
+        option2.textContent = unit;
+
+        fromUnit.appendChild(option1);
+        toUnit.appendChild(option2);
+
+    });
+
+    if (unitNames.length > 1) {
+        fromUnit.selectedIndex = 0;
+        toUnit.selectedIndex = 1;
+    }
+
+    convert();
 }
 
 
-QUANTITIES = list(UNITS.keys())
+/*
+=========================================================
+TEMPERATURE CONVERSION
+=========================================================
+*/
 
+function temperatureToCelsius(value, unit) {
 
-# ============================================================
-# NUMBER FORMAT
-# ============================================================
+    if (unit.includes("Celsius")) {
+        return value;
+    }
 
-def format_number(value):
+    if (unit.includes("Kelvin")) {
+        return value - 273.15;
+    }
 
-    if value == 0:
-        return "0"
+    if (unit.includes("Fahrenheit")) {
+        return (value - 32) * 5 / 9;
+    }
 
-    absolute_value = abs(value)
+}
 
-    # Scientific notation
-    if absolute_value >= 100000 or absolute_value < 0.0001:
 
-        text = f"{value:.6e}"
+function celsiusToTemperature(value, unit) {
 
-        mantissa, exponent = text.split("e")
+    if (unit.includes("Celsius")) {
+        return value;
+    }
 
-        exponent = int(exponent)
+    if (unit.includes("Kelvin")) {
+        return value + 273.15;
+    }
 
-        mantissa = mantissa.rstrip("0").rstrip(".")
+    if (unit.includes("Fahrenheit")) {
+        return (value * 9 / 5) + 32;
+    }
 
-        sign = "+" if exponent >= 0 else "-"
+}
 
-        return f"{mantissa} × 10^{sign}{abs(exponent)}"
 
-    # Integer
-    if value.is_integer():
-        return str(int(value))
+/*
+=========================================================
+FORMAT NUMBER
+=========================================================
+*/
 
-    # Decimal
-    return f"{value:.10f}".rstrip("0").rstrip(".")
+function formatNumber(number) {
 
+    if (!isFinite(number)) {
+        return "—";
+    }
 
-# ============================================================
-# MAIN APPLICATION
-# ============================================================
+    if (number === 0) {
+        return "0";
+    }
 
-class UnitConverter:
+    const abs = Math.abs(number);
 
-    def __init__(self, root):
+    if (abs >= 0.0001 && abs < 1000000) {
 
-        self.root = root
+        return Number(number.toPrecision(10)).toString();
 
-        self.root.title("Unit Converter")
+    }
 
-        self.root.geometry("1024x1450")
+    const exponent = Math.floor(Math.log10(abs));
+    const mantissa = number / Math.pow(10, exponent);
 
-        self.root.minsize(760, 950)
+    return mantissa.toFixed(3).replace(/\.?0+$/, "")
+        + " × 10" + superscript(exponent);
 
-        self.root.configure(bg=BG)
+}
 
 
-        # ----------------------------------------------------
-        # VARIABLES
-        # ----------------------------------------------------
+/*
+=========================================================
+SUPERSCRIPT
+=========================================================
+*/
 
-        self.system_var = tk.StringVar(value="CGS")
+function superscript(number) {
 
-        self.quantity_var = tk.StringVar(value="Force")
+    const map = {
+        "0":"⁰",
+        "1":"¹",
+        "2":"²",
+        "3":"³",
+        "4":"⁴",
+        "5":"⁵",
+        "6":"⁶",
+        "7":"⁷",
+        "8":"⁸",
+        "9":"⁹",
+        "-":"⁻"
+    };
 
-        self.input_value_var = tk.StringVar(value="50")
+    return String(number)
+        .split("")
+        .map(char => map[char] || char)
+        .join("");
+}
 
-        self.input_unit_var = tk.StringVar()
 
-        self.output_unit_var = tk.StringVar()
+/*
+=========================================================
+MAIN CONVERSION
+=========================================================
+*/
 
+function convert() {
 
-        # ----------------------------------------------------
-        # BUILD UI
-        # ----------------------------------------------------
+    const value = parseFloat(valueInput.value);
 
-        self.build_styles()
+    if (isNaN(value)) {
 
-        self.build_header()
+        answer.value = "—";
+        statusText.textContent = "Please enter a valid number.";
+        return;
 
-        self.build_interface()
+    }
 
+    const system = systemSelect.value;
+    const quantity = quantitySelect.value;
 
-        # ----------------------------------------------------
-        # VARIABLE EVENTS
-        # ----------------------------------------------------
+    const from = fromUnit.value;
+    const to = toUnit.value;
 
-        self.system_var.trace_add(
-            "write",
-            self.on_system_change
-        )
+    if (!from || !to) {
+        return;
+    }
 
-        self.quantity_var.trace_add(
-            "write",
-            self.on_quantity_change
-        )
 
-        self.input_value_var.trace_add(
-            "write",
-            self.update_answer
-        )
+    /* Temperature */
+    if (quantity === "Temperature") {
 
-        self.input_unit_var.trace_add(
-            "write",
-            self.update_answer
-        )
+        const celsius = temperatureToCelsius(value, from);
 
-        self.output_unit_var.trace_add(
-            "write",
-            self.update_answer
-        )
+        const result = celsiusToTemperature(celsius, to);
 
+        answer.value = formatNumber(result);
 
-        # ----------------------------------------------------
-        # INITIAL DATA
-        # ----------------------------------------------------
+        statusText.textContent =
+            value + " " + from +
+            " = " +
+            formatNumber(result) + " " + to;
 
-        self.update_units()
+        return;
+    }
 
-        self.update_answer()
 
+    /*
+    For all other quantities:
 
-    # ========================================================
-    # COMBOBOX STYLE
-    # ========================================================
+    value → SI base → target unit
+    */
 
-    def build_styles(self):
+    const fromFactor = units[quantity][system][from];
 
-        style = ttk.Style()
+    const toFactor = units[quantity][system][to];
 
-        style.theme_use("clam")
 
-        style.configure(
-            "Converter.TCombobox",
+    const siValue = value * fromFactor;
 
-            font=("Arial", 20),
+    const result = siValue / toFactor;
 
-            padding=12,
 
-            foreground=TEXT,
+    answer.value = formatNumber(result);
 
-            fieldbackground="white",
 
-            background="white",
+    statusText.textContent =
+        formatNumber(value) + " " + from +
+        " = " +
+        formatNumber(result) + " " + to;
+}
 
-            bordercolor="#c8c8c8",
 
-            lightcolor="#c8c8c8",
+/*
+=========================================================
+SWAP
+=========================================================
+*/
 
-            darkcolor="#c8c8c8",
+function swapUnits() {
 
-            arrowcolor=ARROW,
-        )
+    const temp = fromUnit.value;
 
-        style.map(
-            "Converter.TCombobox",
+    fromUnit.value = toUnit.value;
 
-            fieldbackground=[
-                ("readonly", "white")
-            ],
+    toUnit.value = temp;
 
-            background=[
-                ("readonly", "white")
-            ],
-        )
+    convert();
+}
 
 
-    # ========================================================
-    # HEADER
-    # ========================================================
+/*
+=========================================================
+CLEAR
+=========================================================
+*/
 
-    def build_header(self):
+function clearValue() {
 
-        header = tk.Frame(
-            self.root,
+    valueInput.value = "";
 
-            bg=BLUE,
+    answer.value = "—";
 
-            height=124
-        )
+    statusText.textContent =
+        "Enter a value to convert.";
 
-        header.pack(fill="x")
+    valueInput.focus();
+}
 
-        header.pack_propagate(False)
 
+/*
+=========================================================
+FAVORITE BUTTON
+=========================================================
+*/
 
-        # Hamburger menu
+function toggleFavorite() {
 
-        menu = tk.Label(
+    const star = document.querySelector(".star");
 
-            header,
+    if (star.textContent === "☆") {
+        star.textContent = "★";
+    } else {
+        star.textContent = "☆";
+    }
 
-            text="☰",
+}
 
-            bg=BLUE,
 
-            fg="white",
+/*
+=========================================================
+EVENTS
+=========================================================
+*/
 
-            font=("Arial", 38),
+systemSelect.addEventListener("change", updateUnits);
 
-            cursor="hand2"
-        )
+quantitySelect.addEventListener("change", updateUnits);
 
-        menu.place(
-            x=38,
-            y=30
-        )
+fromUnit.addEventListener("change", convert);
 
+toUnit.addEventListener("change", convert);
 
-        # Title
+valueInput.addEventListener("input", convert);
 
-        title = tk.Label(
 
-            header,
+/*
+=========================================================
+START APPLICATION
+=========================================================
+*/
 
-            text="Unit Converter",
+updateUnits();
 
-            bg=BLUE,
+</script>
 
-            fg="white",
-
-            font=("Arial", 35, "bold")
-        )
-
-        title.place(
-
-            relx=0.5,
-
-            y=35,
-
-            anchor="n"
-        )
-
-
-        # Star
-
-        star = tk.Label(
-
-            header,
-
-            text="☆",
-
-            bg=BLUE,
-
-            fg="white",
-
-            font=("Arial", 48),
-
-            cursor="hand2"
-        )
-
-        star.place(
-
-            relx=0.93,
-
-            y=20,
-
-            anchor="n"
-        )
-
-
-    # ========================================================
-    # CARD CREATOR
-    # ========================================================
-
-    def make_card(
-        self,
-        title,
-        number,
-        answer=False
-    ):
-
-        if answer:
-
-            background = LIGHT_GREEN
-
-            border = BORDER_GREEN
-
-            heading_color = GREEN
-
-        else:
-
-            background = LIGHT_BLUE
-
-            border = BORDER_BLUE
-
-            heading_color = BLUE
-
-
-        outer = tk.Frame(
-
-            self.root,
-
-            bg=background,
-
-            highlightbackground=border,
-
-            highlightthickness=2,
-
-            bd=0
-        )
-
-        outer.pack(
-
-            fill="x",
-
-            padx=38,
-
-            pady=(
-                42 if number == 1 else 0,
-                0
-            )
-        )
-
-
-        heading = tk.Label(
-
-            outer,
-
-            text=f"{number}. {title}",
-
-            bg=background,
-
-            fg=heading_color,
-
-            font=("Arial", 26, "bold"),
-
-            anchor="w"
-        )
-
-        heading.pack(
-
-            fill="x",
-
-            padx=30,
-
-            pady=(30, 25)
-        )
-
-
-        return outer
-
-
-    # ========================================================
-    # INTERFACE
-    # ========================================================
-
-    def build_interface(self):
-
-        # ====================================================
-        # 1. CONVERT IN
-        # ====================================================
-
-        card1 = self.make_card(
-
-            "Convert in",
-
-            1
-        )
-
-
-        self.system_combo = ttk.Combobox(
-
-            card1,
-
-            textvariable=self.system_var,
-
-            values=[
-                "SI",
-                "CGS"
-            ],
-
-            state="readonly",
-
-            style="Converter.TCombobox"
-        )
-
-
-        self.system_combo.pack(
-
-            fill="x",
-
-            padx=30,
-
-            pady=(0, 42),
-
-            ipady=8
-        )
-
-
-        # ====================================================
-        # 2. PHYSICAL QUANTITY
-        # ====================================================
-
-        card2 = self.make_card(
-
-            "Physical Quantity",
-
-            2
-        )
-
-
-        self.quantity_combo = ttk.Combobox(
-
-            card2,
-
-            textvariable=self.quantity_var,
-
-            values=QUANTITIES,
-
-            state="readonly",
-
-            style="Converter.TCombobox"
-        )
-
-
-        self.quantity_combo.pack(
-
-            fill="x",
-
-            padx=30,
-
-            pady=(0, 42),
-
-            ipady=8
-        )
-
-
-        # ====================================================
-        # 3. ENTER VALUE
-        # ====================================================
-
-        card3 = self.make_card(
-
-            "Enter value",
-
-            3
-        )
-
-
-        row3 = tk.Frame(
-
-            card3,
-
-            bg=LIGHT_BLUE
-        )
-
-
-        row3.pack(
-
-            fill="x",
-
-            padx=30,
-
-            pady=(0, 42)
-        )
-
-
-        row3.grid_columnconfigure(
-
-            0,
-
-            weight=1
-        )
-
-
-        row3.grid_columnconfigure(
-
-            1,
-
-            weight=1
-        )
-
-
-        # Value input
-
-        self.value_entry = tk.Entry(
-
-            row3,
-
-            textvariable=self.input_value_var,
-
-            font=("Arial", 22),
-
-            relief="solid",
-
-            bd=1,
-
-            highlightthickness=1,
-
-            highlightbackground="#c8c8c8"
-        )
-
-
-        self.value_entry.grid(
-
-            row=0,
-
-            column=0,
-
-            sticky="ew",
-
-            ipady=18,
-
-            padx=(0, 16)
-        )
-
-
-        # Input unit
-
-        self.input_combo = ttk.Combobox(
-
-            row3,
-
-            textvariable=self.input_unit_var,
-
-            state="readonly",
-
-            style="Converter.TCombobox"
-        )
-
-
-        self.input_combo.grid(
-
-            row=0,
-
-            column=1,
-
-            sticky="ew",
-
-            ipady=8,
-
-            padx=(16, 0)
-        )
-
-
-        # ====================================================
-        # 4. YOUR ANSWER
-        # ====================================================
-
-        card4 = self.make_card(
-
-            "Your answer",
-
-            4,
-
-            answer=True
-        )
-
-
-        row4 = tk.Frame(
-
-            card4,
-
-            bg=LIGHT_GREEN
-        )
-
-
-        row4.pack(
-
-            fill="x",
-
-            padx=30,
-
-            pady=(0, 42)
-        )
-
-
-        row4.grid_columnconfigure(
-
-            0,
-
-            weight=1
-        )
-
-
-        row4.grid_columnconfigure(
-
-            1,
-
-            weight=1
-        )
-
-
-        # Answer value
-
-        self.answer_value_label = tk.Label(
-
-            row4,
-
-            text="",
-
-            bg="white",
-
-            fg=TEXT,
-
-            font=("Arial", 22),
-
-            anchor="w",
-
-            padx=25,
-
-            relief="solid",
-
-            bd=1
-        )
-
-
-        self.answer_value_label.grid(
-
-            row=0,
-
-            column=0,
-
-            sticky="ew",
-
-            ipady=18,
-
-            padx=(0, 16)
-        )
-
-
-        # Output unit
-
-        self.output_combo = ttk.Combobox(
-
-            row4,
-
-            textvariable=self.output_unit_var,
-
-            state="readonly",
-
-            style="Converter.TCombobox"
-        )
-
-
-        self.output_combo.grid(
-
-            row=0,
-
-            column=1,
-
-            sticky="ew",
-
-            ipady=8,
-
-            padx=(16, 0)
-        )
-
-
-        # ====================================================
-        # STATUS
-        # ====================================================
-
-        self.status_label = tk.Label(
-
-            self.root,
-
-            text="",
-
-            bg=BG,
-
-            fg="#666666",
-
-            font=("Arial", 13)
-        )
-
-
-        self.status_label.pack(
-
-            pady=24
-        )
-
-
-    # ========================================================
-    # SYSTEM CHANGE
-    # ========================================================
-
-    def on_system_change(self, *_):
-
-        self.update_units()
-
-
-    # ========================================================
-    # QUANTITY CHANGE
-    # ========================================================
-
-    def on_quantity_change(self, *_):
-
-        self.update_units()
-
-
-    # ========================================================
-    # UPDATE UNITS
-    # ========================================================
-
-    def update_units(self):
-
-        quantity = self.quantity_var.get()
-
-        system = self.system_var.get()
-
-
-        if quantity not in UNITS:
-
-            return
-
-
-        units = list(
-            UNITS[quantity][system].keys()
-        )
-
-
-        # Update input dropdown
-
-        self.input_combo["values"] = units
-
-
-        # Update output dropdown
-
-        self.output_combo["values"] = units
-
-
-        # ----------------------------------------------------
-        # Default units
-        # ----------------------------------------------------
-
-        # Screenshot example:
-        #
-        # 50 Newton
-        #
-        # becomes
-        #
-        # 5.0 × 10^6 dyne
-
-        if (
-            quantity == "Force"
-            and
-            system == "CGS"
-        ):
-
-            input_default = "Newton (N)"
-
-            output_default = "dyne (dyn)"
-
-
-        else:
-
-            input_default = units[0]
-
-            if len(units) > 1:
-
-                output_default = units[1]
-
-            else:
-
-                output_default = units[0]
-
-
-        # Set input unit
-
-        if input_default in units:
-
-            self.input_unit_var.set(
-                input_default
-            )
-
-        else:
-
-            self.input_unit_var.set(
-                units[0]
-            )
-
-
-        # Set output unit
-
-        if output_default in units:
-
-            self.output_unit_var.set(
-                output_default
-            )
-
-        else:
-
-            self.output_unit_var.set(
-                units[0]
-            )
-
-
-        self.update_answer()
-
-
-    # ========================================================
-    # CALCULATE ANSWER
-    # ========================================================
-
-    def update_answer(self, *_):
-
-        quantity = self.quantity_var.get()
-
-        system = self.system_var.get()
-
-        input_unit = self.input_unit_var.get()
-
-        output_unit = self.output_unit_var.get()
-
-
-        if not input_unit or not output_unit:
-
-            return
-
-
-        # ----------------------------------------------------
-        # Read number
-        # ----------------------------------------------------
-
-        try:
-
-            value = float(
-                self.input_value_var.get().strip()
-            )
-
-        except ValueError:
-
-            self.answer_value_label.config(
-                text="—"
-            )
-
-            self.status_label.config(
-
-                text="Please enter a valid number."
-            )
-
-            return
-
-
-        units = UNITS[quantity][system]
-
-
-        if (
-            input_unit not in units
-            or
-            output_unit not in units
-        ):
-
-            return
-
-
-        # ----------------------------------------------------
-        # Convert
-        #
-        # Input unit
-        #       ↓
-        # SI base unit
-        #       ↓
-        # Output unit
-        # ----------------------------------------------------
-
-        base_value = (
-            value
-            *
-            units[input_unit]
-        )
-
-
-        result = (
-            base_value
-            /
-            units[output_unit]
-        )
-
-
-        # ----------------------------------------------------
-        # Show result
-        # ----------------------------------------------------
-
-        self.answer_value_label.config(
-
-            text=format_number(result)
-        )
-
-
-        # Status text
-
-        self.status_label.config(
-
-            text=(
-                f"{format_number(value)} "
-                f"{input_unit}"
-                f"  =  "
-                f"{format_number(result)} "
-                f"{output_unit}"
-            )
-        )
-
-
-# ============================================================
-# MAIN
-# ============================================================
-
-def main():
-
-    root = tk.Tk()
-
-    app = UnitConverter(root)
-
-    root.mainloop()
-
-
-# ============================================================
-# RUN PROGRAM
-# ============================================================
-if __name__ == "__main__":
-
-    main()
+</body>
+</html>
