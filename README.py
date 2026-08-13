@@ -1,294 +1,47 @@
-import tkinter as tk
-from tkinter import ttk
+import streamlit as st
 
-# Unit conversion data
-units = {
-    "Force": {
-        "SI": {
-            "Newton (N)": 1
-        },
-        "CGS": {
-            "Dyne (dyn)": 0.00001,
-            "Newton (N)": 100000
-        }
-    },
+st.set_page_config(page_title="Unit Converter", page_icon="🔄")
 
-    "Length": {
-        "SI": {
-            "Meter (m)": 1,
-            "Kilometer (km)": 1000,
-            "Centimeter (cm)": 0.01
-        },
-        "CGS": {
-            "Centimeter (cm)": 1,
-            "Meter (m)": 100
-        }
-    },
+st.title("🔄 Unit Converter")
+st.write("Convert common units easily.")
 
-    "Mass": {
-        "SI": {
-            "Kilogram (kg)": 1,
-            "Gram (g)": 0.001
-        },
-        "CGS": {
-            "Gram (g)": 1,
-            "Kilogram (kg)": 1000
-        }
-    },
+value = st.number_input("Enter value", value=1.0)
 
-    "Time": {
-        "SI": {
-            "Second (s)": 1,
-            "Minute (min)": 60,
-            "Hour (h)": 3600
-        },
-        "CGS": {
-            "Second (s)": 1,
-            "Minute (min)": 60,
-            "Hour (h)": 3600
-        }
-    }
-}
-
-
-# Main window
-root = tk.Tk()
-root.title("Unit Converter")
-root.geometry("700x750")
-root.configure(bg="white")
-
-
-# Title
-title = tk.Label(
-    root,
-    text="Unit Converter",
-    font=("Arial", 28, "bold"),
-    bg="#3159b7",
-    fg="white",
-    pady=20
-)
-title.pack(fill="x")
-
-
-# 1. Convert in
-label1 = tk.Label(
-    root,
-    text="1. Convert in",
-    font=("Arial", 18, "bold"),
-    fg="#3159b7",
-    bg="white"
-)
-label1.pack(anchor="w", padx=40, pady=(30, 10))
-
-
-system = ttk.Combobox(
-    root,
-    values=["SI", "CGS"],
-    state="readonly",
-    font=("Arial", 16)
-)
-system.pack(fill="x", padx=40, ipady=8)
-system.set("CGS")
-
-
-# 2. Physical Quantity
-label2 = tk.Label(
-    root,
-    text="2. Physical Quantity",
-    font=("Arial", 18, "bold"),
-    fg="#3159b7",
-    bg="white"
-)
-label2.pack(anchor="w", padx=40, pady=(30, 10))
-
-
-quantity = ttk.Combobox(
-    root,
-    values=list(units.keys()),
-    state="readonly",
-    font=("Arial", 16)
-)
-quantity.pack(fill="x", padx=40, ipady=8)
-quantity.set("Force")
-
-
-# 3. Enter value
-label3 = tk.Label(
-    root,
-    text="3. Enter value",
-    font=("Arial", 18, "bold"),
-    fg="#3159b7",
-    bg="white"
-)
-label3.pack(anchor="w", padx=40, pady=(30, 10))
-
-
-value_frame = tk.Frame(root, bg="white")
-value_frame.pack(fill="x", padx=40)
-
-
-value = tk.Entry(
-    value_frame,
-    font=("Arial", 18)
-)
-value.pack(
-    side="left",
-    fill="x",
-    expand=True,
-    ipady=10
-)
-value.insert(0, "50")
-
-
-from_unit = ttk.Combobox(
-    value_frame,
-    state="readonly",
-    font=("Arial", 14)
-)
-from_unit.pack(
-    side="right",
-    padx=(15, 0),
-    ipady=8
+conversion = st.selectbox(
+    "Choose conversion",
+    [
+        "Kilometer → Meter",
+        "Meter → Kilometer",
+        "Meter → Centimeter",
+        "Centimeter → Meter",
+        "Kilogram → Gram",
+        "Gram → Kilogram",
+        "Celsius → Fahrenheit",
+        "Fahrenheit → Celsius",
+        "Liter → Milliliter",
+        "Milliliter → Liter"
+    ]
 )
 
+if conversion == "Kilometer → Meter":
+    result = value * 1000
+elif conversion == "Meter → Kilometer":
+    result = value / 1000
+elif conversion == "Meter → Centimeter":
+    result = value * 100
+elif conversion == "Centimeter → Meter":
+    result = value / 100
+elif conversion == "Kilogram → Gram":
+    result = value * 1000
+elif conversion == "Gram → Kilogram":
+    result = value / 1000
+elif conversion == "Celsius → Fahrenheit":
+    result = (value * 9 / 5) + 32
+elif conversion == "Fahrenheit → Celsius":
+    result = (value - 32) * 5 / 9
+elif conversion == "Liter → Milliliter":
+    result = value * 1000
+elif conversion == "Milliliter → Liter":
+    result = value / 1000
 
-# 4. Answer
-label4 = tk.Label(
-    root,
-    text="4. Your answer",
-    font=("Arial", 18, "bold"),
-    fg="#4d9367",
-    bg="#f2faf5"
-)
-label4.pack(
-    fill="x",
-    padx=40,
-    pady=(30, 10)
-)
-
-
-answer_frame = tk.Frame(
-    root,
-    bg="#f2faf5"
-)
-answer_frame.pack(
-    fill="x",
-    padx=40
-)
-
-
-answer = tk.Entry(
-    answer_frame,
-    font=("Arial", 18),
-    state="readonly"
-)
-answer.pack(
-    side="left",
-    fill="x",
-    expand=True,
-    ipady=10
-)
-
-
-to_unit = ttk.Combobox(
-    answer_frame,
-    state="readonly",
-    font=("Arial", 14)
-)
-to_unit.pack(
-    side="right",
-    padx=(15, 0),
-    ipady=8
-)
-
-
-# Update units
-def update_units(event=None):
-
-    selected_system = system.get()
-    selected_quantity = quantity.get()
-
-    available_units = list(
-        units[selected_quantity][selected_system].keys()
-    )
-
-    from_unit["values"] = available_units
-    to_unit["values"] = available_units
-
-    if len(available_units) >= 1:
-        from_unit.set(available_units[0])
-
-    if len(available_units) >= 2:
-        to_unit.set(available_units[1])
-    else:
-        to_unit.set(available_units[0])
-
-
-# Convert function
-def convert():
-
-    try:
-
-        number = float(value.get())
-
-        selected_system = system.get()
-        selected_quantity = quantity.get()
-
-        source = from_unit.get()
-        target = to_unit.get()
-
-        source_factor = units[
-            selected_quantity
-        ][selected_system][source]
-
-        target_factor = units[
-            selected_quantity
-        ][selected_system][target]
-
-        base_value = number * source_factor
-
-        result = base_value / target_factor
-
-        answer.config(state="normal")
-        answer.delete(0, tk.END)
-        answer.insert(0, f"{result:.6g}")
-        answer.config(state="readonly")
-
-    except ValueError:
-
-        answer.config(state="normal")
-        answer.delete(0, tk.END)
-        answer.insert(0, "Invalid value")
-        answer.config(state="readonly")
-
-
-# Convert button
-convert_button = tk.Button(
-    root,
-    text="Convert",
-    command=convert,
-    font=("Arial", 16, "bold"),
-    bg="#3159b7",
-    fg="white",
-    padx=30,
-    pady=10
-)
-convert_button.pack(pady=30)
-
-
-# Dropdown events
-system.bind(
-    "<<ComboboxSelected>>",
-    update_units
-)
-
-quantity.bind(
-    "<<ComboboxSelected>>",
-    update_units
-)
-
-
-# Start
-update_units()
-
-root.mainloop()
+st.success(f"Result: {result:g}")
