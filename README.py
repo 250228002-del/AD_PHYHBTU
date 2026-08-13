@@ -1,18 +1,14 @@
 import tkinter as tk
 from tkinter import ttk
 
-
-# -----------------------------
-# Unit Conversion Data
-# -----------------------------
-
+# Unit conversion data
 units = {
     "Force": {
         "SI": {
             "Newton (N)": 1
         },
         "CGS": {
-            "Dyne (dyn)": 1,
+            "Dyne (dyn)": 0.00001,
             "Newton (N)": 100000
         }
     },
@@ -55,21 +51,14 @@ units = {
 }
 
 
-# -----------------------------
-# Main Window
-# -----------------------------
-
+# Main window
 root = tk.Tk()
-
 root.title("Unit Converter")
 root.geometry("700x750")
 root.configure(bg="white")
 
 
-# -----------------------------
 # Title
-# -----------------------------
-
 title = tk.Label(
     root,
     text="Unit Converter",
@@ -78,21 +67,18 @@ title = tk.Label(
     fg="white",
     pady=20
 )
-
 title.pack(fill="x")
 
 
-# -----------------------------
 # 1. Convert in
-# -----------------------------
-
-tk.Label(
+label1 = tk.Label(
     root,
     text="1. Convert in",
     font=("Arial", 18, "bold"),
     fg="#3159b7",
     bg="white"
-).pack(anchor="w", padx=40, pady=(30, 10))
+)
+label1.pack(anchor="w", padx=40, pady=(30, 10))
 
 
 system = ttk.Combobox(
@@ -101,23 +87,19 @@ system = ttk.Combobox(
     state="readonly",
     font=("Arial", 16)
 )
-
 system.pack(fill="x", padx=40, ipady=8)
-
 system.set("CGS")
 
 
-# -----------------------------
 # 2. Physical Quantity
-# -----------------------------
-
-tk.Label(
+label2 = tk.Label(
     root,
     text="2. Physical Quantity",
     font=("Arial", 18, "bold"),
     fg="#3159b7",
     bg="white"
-).pack(anchor="w", padx=40, pady=(30, 10))
+)
+label2.pack(anchor="w", padx=40, pady=(30, 10))
 
 
 quantity = ttk.Combobox(
@@ -126,23 +108,19 @@ quantity = ttk.Combobox(
     state="readonly",
     font=("Arial", 16)
 )
-
 quantity.pack(fill="x", padx=40, ipady=8)
-
 quantity.set("Force")
 
 
-# -----------------------------
-# 3. Enter Value
-# -----------------------------
-
-tk.Label(
+# 3. Enter value
+label3 = tk.Label(
     root,
     text="3. Enter value",
     font=("Arial", 18, "bold"),
     fg="#3159b7",
     bg="white"
-).pack(anchor="w", padx=40, pady=(30, 10))
+)
+label3.pack(anchor="w", padx=40, pady=(30, 10))
 
 
 value_frame = tk.Frame(root, bg="white")
@@ -153,14 +131,12 @@ value = tk.Entry(
     value_frame,
     font=("Arial", 18)
 )
-
 value.pack(
     side="left",
     fill="x",
     expand=True,
     ipady=10
 )
-
 value.insert(0, "50")
 
 
@@ -169,7 +145,6 @@ from_unit = ttk.Combobox(
     state="readonly",
     font=("Arial", 14)
 )
-
 from_unit.pack(
     side="right",
     padx=(15, 0),
@@ -177,21 +152,29 @@ from_unit.pack(
 )
 
 
-# -----------------------------
 # 4. Answer
-# -----------------------------
-
-tk.Label(
+label4 = tk.Label(
     root,
     text="4. Your answer",
     font=("Arial", 18, "bold"),
     fg="#4d9367",
-    bg="white"
-).pack(anchor="w", padx=40, pady=(30, 10))
+    bg="#f2faf5"
+)
+label4.pack(
+    fill="x",
+    padx=40,
+    pady=(30, 10)
+)
 
 
-answer_frame = tk.Frame(root, bg="#f2faf5")
-answer_frame.pack(fill="x", padx=40)
+answer_frame = tk.Frame(
+    root,
+    bg="#f2faf5"
+)
+answer_frame.pack(
+    fill="x",
+    padx=40
+)
 
 
 answer = tk.Entry(
@@ -199,7 +182,6 @@ answer = tk.Entry(
     font=("Arial", 18),
     state="readonly"
 )
-
 answer.pack(
     side="left",
     fill="x",
@@ -213,7 +195,6 @@ to_unit = ttk.Combobox(
     state="readonly",
     font=("Arial", 14)
 )
-
 to_unit.pack(
     side="right",
     padx=(15, 0),
@@ -221,10 +202,7 @@ to_unit.pack(
 )
 
 
-# -----------------------------
-# Update Units
-# -----------------------------
-
+# Update units
 def update_units(event=None):
 
     selected_system = system.get()
@@ -237,19 +215,16 @@ def update_units(event=None):
     from_unit["values"] = available_units
     to_unit["values"] = available_units
 
-    if len(available_units) > 0:
+    if len(available_units) >= 1:
         from_unit.set(available_units[0])
 
-    if len(available_units) > 1:
+    if len(available_units) >= 2:
         to_unit.set(available_units[1])
     else:
         to_unit.set(available_units[0])
 
 
-# -----------------------------
-# Convert
-# -----------------------------
-
+# Convert function
 def convert():
 
     try:
@@ -270,38 +245,24 @@ def convert():
             selected_quantity
         ][selected_system][target]
 
-        # Convert to base unit
         base_value = number * source_factor
 
-        # Convert to target
         result = base_value / target_factor
 
         answer.config(state="normal")
-
         answer.delete(0, tk.END)
-
-        answer.insert(
-            0,
-            f"{result:.6g}"
-        )
-
+        answer.insert(0, f"{result:.6g}")
         answer.config(state="readonly")
 
     except ValueError:
 
         answer.config(state="normal")
-
         answer.delete(0, tk.END)
-
         answer.insert(0, "Invalid value")
-
         answer.config(state="readonly")
 
 
-# -----------------------------
-# Convert Button
-# -----------------------------
-
+# Convert button
 convert_button = tk.Button(
     root,
     text="Convert",
@@ -312,14 +273,10 @@ convert_button = tk.Button(
     padx=30,
     pady=10
 )
-
 convert_button.pack(pady=30)
 
 
-# -----------------------------
-# Events
-# -----------------------------
-
+# Dropdown events
 system.bind(
     "<<ComboboxSelected>>",
     update_units
@@ -331,10 +288,7 @@ quantity.bind(
 )
 
 
-# -----------------------------
 # Start
-# -----------------------------
-
 update_units()
 
 root.mainloop()
