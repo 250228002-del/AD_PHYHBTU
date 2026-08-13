@@ -19,7 +19,7 @@ body {
 
 /* Header */
 .header {
-    height: 125px;
+    height = 125
     background: linear-gradient(135deg, #3159b7, #294fa9);
     color: white;
     display: flex;
