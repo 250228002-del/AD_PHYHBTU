@@ -82,7 +82,7 @@ st.markdown(
 
 system = st.selectbox(
     "Conversion System",
-    ["CGS", "SI"],
+    ["SI", "CGS"],
     label_visibility="collapsed"
 )
 
