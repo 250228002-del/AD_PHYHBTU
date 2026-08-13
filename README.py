@@ -3,7 +3,7 @@ import streamlit as st
 st.set_page_config(
     page_title="Unit Converter",
     page_icon="⭐",
-    layout="narrow"
+    layout="wide"
 )
 
 # -----------------------------
