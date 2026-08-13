@@ -2,12 +2,12 @@
 
 def si_to_cgs(value, unit):
     conversions = {
-        "m": ("cm", 100),       # meter -> centimeter
-        "kg": ("g", 1000),      # kilogram -> gram
-        "s": ("s", 1),          # second -> second
-        "N": ("dyne", 100000),  # newton -> dyne
-        "J": ("erg", 10000000), # joule -> erg
-        "Pa": ("Ba", 10),       # pascal -> barye
+        "m": ("cm", 100),       
+        "kg": ("g", 1000),      
+        "s": ("s", 1),          
+        "N": ("dyne", 100000),  
+        "J": ("erg", 10000000), 
+        "Pa": ("Ba", 10),      
     }
 
     if unit in conversions:
