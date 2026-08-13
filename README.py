@@ -1,6 +1,4 @@
 import streamlit as st
-import tkinter as tk
-from tkinter import ttk
 from math import pi
 
 
