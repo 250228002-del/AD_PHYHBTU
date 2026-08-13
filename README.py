@@ -748,9 +748,6 @@ class UnitConverterApp:
 
 
 # ============================================================
-# RUN APPLICATION
+# RUN APPLICATION deft(root)
 # ============================================================
 
-if __name__ == "__main__":
-
-    root.mainloop()
