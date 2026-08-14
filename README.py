@@ -283,11 +283,12 @@ def convert_time(value, unit):
 
 
 def convert_magnetic_induction(value, unit):
-    if unit == "Tesla (T)":
-        return value * 10000, "Gauss (G)"
-    elif unit == "Gauss (G)":
-        return value / 10000, "Tesla (T)"
-    
+    if unit == "Gauss (G)":
+        return value * 10000, "Tesla (T)"
+    elif unit == "Tesla (T)Gauss (G)":
+        return value / 10000, "Gauss (G)"
+    else:
+        return value, unit
 
 
 if quantity == "Force(F)":
