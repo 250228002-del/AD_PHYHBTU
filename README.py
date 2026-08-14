@@ -464,7 +464,7 @@ def convert_molar_magnetic_susceptibility(value, unit):
         return value * (10**6 / (4 * math.pi)), "emu Oe^-1 g^-1 mol^-1"
     elif unit in ["emu Oe^-1 g^-1 mol^-1", "emu Oe−1 g−1 mol−1"]:
         return value / (10**6 / (4 * math.pi)), "m^3 mol^-1"
-     else:
+    else:
         return value, unit
 
 def convert_magnetic_permeability(value, unit):
