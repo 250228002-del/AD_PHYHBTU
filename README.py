@@ -134,7 +134,7 @@ st.markdown("</div>", unsafe_allow_html=True)
 # -----------------------------
 # Units
 # -----------------------------
-units = 
+units = {
     "Force": {
         "CGS": ["Newton (N)", "Kilonewton (kN)"],
         "SI": ["dyne (dyn)", "Kilodyne (kdyn)"]
@@ -169,8 +169,7 @@ units =
         "CGS": ["Second (s)", "Minute (min)", "Hour (h)"],
         "SI": ["Second (s)", "Minute (min)", "Hour (h)"]
     }
-
-
+}
 # -----------------------------
 # 3. Enter Value
 # -----------------------------
