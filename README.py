@@ -35,9 +35,9 @@ st.markdown("""
 
     .heading {
         color: #3159b7;
-        font-size: 30px;
+        font-size: 20px;
         font-weight: 700;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
     }
 
     .answer {
