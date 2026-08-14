@@ -282,7 +282,7 @@ def convert_time(value, unit):
         return value * 3600, "Second (s)"
 
 
-def convert_magnetic induction(value, unit):
+def convert_magnetic_induction(value, unit):
     if unit == "Tesla (T)":
         return value * 10000, "Gauss (G)"
     elif unit == "Gauss (G)":
