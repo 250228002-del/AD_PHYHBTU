@@ -170,7 +170,7 @@ units = {
         "SI": ["Second (s)", "Minute (min)", "Hour (h)"]
     },
 
-    "Magnetic induction(B)" {
+    "Magnetic induction(B)": {
         "CGS": ["tesla(T)"],
         "SI": ["gauss(G)"]
     }
