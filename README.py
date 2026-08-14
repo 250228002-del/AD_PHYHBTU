@@ -136,8 +136,8 @@ st.markdown("</div>", unsafe_allow_html=True)
 # -----------------------------
 units = {
     "Force(F)": {
-        "CGS": ["Newton (N)", "Kilonewton (kN)"],
-        "SI": ["dyne (dyn)", "Kilodyne (kdyn)"]
+        "CGS": ["Newton (N)",
+        "SI": ["dyne (dyn)"
     },
 
     "Energy(E)": {
@@ -212,13 +212,9 @@ st.markdown("</div>", unsafe_allow_html=True)
 def convert_force(value, unit):
     if unit == "Newton (N)":
         return value * 100000, "dyne (dyn)"
-    elif unit == "Kilonewton (kN)":
-        return value * 100000000, "dyne (dyn)"
     elif unit == "dyne (dyn)":
         return value / 100000, "Newton (N)"
-    elif unit == "Kilodyne (kdyn)":
-        return value * 10000, "Newton (N)"
-
+    
 
 def convert_energy(value, unit):
     if unit == "Joule (J)":
