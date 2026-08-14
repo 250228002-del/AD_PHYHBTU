@@ -27,9 +27,9 @@ st.markdown("""
 
     .box {
         border: 2px solid #dce5ff;
-        border-radius: 18px;
-        padding: 25px;
-        margin: 20px 0;
+        border-radius: 15px;
+        padding: 10px;
+        margin: 15px 0;
         background: #ffffff;
     }
 
