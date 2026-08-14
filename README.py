@@ -311,7 +311,7 @@ elif quantity == "Time(T)":
     result, result_unit = convert_time(value, selected_unit)
     
 elif quantity == "Magnetic induction(B)":
-    result, result_unit = convert_magnetic induction(value, selected_unit)
+    result, result_unit = convert_magnetic_induction(value, selected_unit)
 
 
 # -----------------------------
