@@ -99,7 +99,7 @@ quantity = st.selectbox(
     "Physical Quantity",
     [
         "Force(F)",
-        "Energy",
+        "Energy(E)",
         "Power",
         "Pressure",
         "Length",
@@ -140,7 +140,7 @@ units = {
         "SI": ["dyne (dyn)", "Kilodyne (kdyn)"]
     },
 
-    "Energy": {
+    "Energy(E)": {
         "CGS": ["Joule (J)", "Kilojoule (kJ)"],
         "SI": ["erg", "Kilerg"]
     },
@@ -279,7 +279,7 @@ def convert_time(value, unit):
 if quantity == "Force(F)":
     result, result_unit = convert_force(value, selected_unit)
 
-elif quantity == "Energy":
+elif quantity == "Energy(E)":
     result, result_unit = convert_energy(value, selected_unit)
 
 elif quantity == "Power":
