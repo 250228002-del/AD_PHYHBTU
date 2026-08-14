@@ -293,7 +293,7 @@ if quantity == "Force(F)":
 elif quantity == "Energy(E)":
     result, result_unit = convert_energy(value, selected_unit)
 
-elif quantity == "Power(P)":"
+elif quantity == "Power(P)":
     result, result_unit = convert_power(value, selected_unit)
 
 elif quantity == "Pressure(p)":
