@@ -45,7 +45,7 @@ st.markdown("""
         padding: 15px;
         margin-top: 20px;
         background: #f5fff7;
-    }
+    } 
 
     .answer-title {
         color: #3b9b59;
@@ -66,7 +66,7 @@ st.markdown("""
 # Header
 # -----------------------------
 st.markdown(
-    '<div class="topbar">☰ &nbsp;&nbsp;&nbsp; Unit Converter &nbsp;&nbsp;&nbsp; ☆</div>',
+    '<div class="topbar">☰ &nbsp;&nbsp;&nbsp; Unit Converter &nbsp;&nbsp;&nbsp; </div>',
     unsafe_allow_html=True
 )
 
