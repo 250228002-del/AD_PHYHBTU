@@ -98,7 +98,7 @@ st.markdown(
 quantity = st.selectbox(
     "Physical Quantity",
     [
-        "Force",
+        "Force(F)",
         "Energy",
         "Power",
         "Pressure",
@@ -135,7 +135,7 @@ st.markdown("</div>", unsafe_allow_html=True)
 # Units
 # -----------------------------
 units = {
-    "Force": {
+    "Force(F)": {
         "CGS": ["Newton (N)", "Kilonewton (kN)"],
         "SI": ["dyne (dyn)", "Kilodyne (kdyn)"]
     },
@@ -203,7 +203,7 @@ st.markdown("</div>", unsafe_allow_html=True)
 # Conversion Logic
 # -----------------------------
 
-def convert_force(value, unit):
+def convert_force(F)(value, unit):
     if unit == "Newton (N)":
         return value * 100000, "dyne (dyn)"
     elif unit == "Kilonewton (kN)":
@@ -276,8 +276,8 @@ def convert_time(value, unit):
         return value * 3600, "Second (s)"
 
 
-if quantity == "Force":
-    result, result_unit = convert_force(value, selected_unit)
+if quantity == "Force(F)":
+    result, result_unit = convert_force(F)(value, selected_unit)
 
 elif quantity == "Energy":
     result, result_unit = convert_energy(value, selected_unit)
