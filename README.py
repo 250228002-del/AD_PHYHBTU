@@ -279,9 +279,9 @@ def convert_time(value, unit):
 
 
 def convert_magnetic_induction(value, unit):
-    if unit in ["Tesla (T)", "Tesla(T)", "tesla(T)", "tesla(T)"]:
+    if unit in ["Tesla (T)", "Tesla(T)", "tesla(T)", "tesla (T)"]:
         return value * 100000, "Gauss (G)"
-    elif unit in ["Gauss (G)", "Gauss(G), "gauss(G), "gauss (G)"]:
+    elif unit in ["Gauss (G)", "Gauss(G)", "gauss(G)", "gauss (G)"]:
         return value / 100000, "Tesla (T)"
     else:
         return value, unit
