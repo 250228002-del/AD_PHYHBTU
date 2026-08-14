@@ -100,7 +100,7 @@ quantity = st.selectbox(
     [
         "Force(F)",
         "Energy(E)",
-        "Power",
+        "Power(P)",
         "Pressure",
         "Length",
         "Mass",
@@ -145,7 +145,7 @@ units = {
         "SI": ["erg", "Kilerg"]
     },
 
-    "Power": {
+    "Power(P)": {
         "CGS": ["Watt (W)", "Kilowatt (kW)"],
         "SI": ["erg/second", "Kilerg/second"]
     },
@@ -282,7 +282,7 @@ if quantity == "Force(F)":
 elif quantity == "Energy(E)":
     result, result_unit = convert_energy(value, selected_unit)
 
-elif quantity == "Power":
+elif quantity == "Power(P)":
     result, result_unit = convert_power(value, selected_unit)
 
 elif quantity == "Pressure":
