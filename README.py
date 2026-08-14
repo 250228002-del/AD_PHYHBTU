@@ -18,7 +18,7 @@ st.markdown("""
     .topbar {
         background: linear-gradient(135deg, #3159b7, #294fa9);
         padding: 5px;
-        margin: -50px -50px 35px -50px;
+        margin: -10px -10px 35px -10px;
         text-align: center;
         color: white;
         font-size: 40px;
