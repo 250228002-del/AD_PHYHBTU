@@ -169,6 +169,10 @@ units = {
         "CGS": ["Second (s)", "Minute (min)", "Hour (h)"],
         "SI": ["Second (s)", "Minute (min)", "Hour (h)"]
     }
+
+    "Magnetic induction":{
+        "CGS": ["tesla (T)"],
+        "SI": ["gauss(G)"],
 }
 
 
