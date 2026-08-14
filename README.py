@@ -141,33 +141,33 @@ units = {
     },
 
     "Energy": {
-        "SI": ["Joule (J)", "Kilojoule (kJ)"],
-        "CGS": ["erg", "Kilerg"]
+        "CGS": ["Joule (J)", "Kilojoule (kJ)"],
+        "SI": ["erg", "Kilerg"]
     },
 
     "Power": {
-        "SI": ["Watt (W)", "Kilowatt (kW)"],
-        "CGS": ["erg/second", "Kilerg/second"]
+        "CGS": ["Watt (W)", "Kilowatt (kW)"],
+        "SI": ["erg/second", "Kilerg/second"]
     },
 
     "Pressure": {
-        "SI": ["Pascal (Pa)", "Kilopascal (kPa)"],
-        "CGS": ["Barye (Ba)", "Kilobarye (kBa)"]
+        "CGS": ["Pascal (Pa)", "Kilopascal (kPa)"],
+        "SI": ["Barye (Ba)", "Kilobarye (kBa)"]
     },
 
     "Length": {
-        "SI": ["Meter (m)", "Kilometer (km)", "Centimeter (cm)"],
-        "CGS": ["Centimeter (cm)", "Millimeter (mm)"]
+        "CGS": ["Meter (m)", "Kilometer (km)", "Centimeter (cm)"],
+        "SI": ["Centimeter (cm)", "Millimeter (mm)"]
     },
 
     "Mass": {
-        "SI": ["Kilogram (kg)", "Gram (g)"],
-        "CGS": ["Gram (g)", "Milligram (mg)"]
+        "CGS": ["Kilogram (kg)", "Gram (g)"],
+        "SI": ["Gram (g)", "Milligram (mg)"]
     },
 
     "Time": {
-        "SI": ["Second (s)", "Minute (min)", "Hour (h)"],
-        "CGS": ["Second (s)", "Minute (min)", "Hour (h)"]
+        "CGS": ["Second (s)", "Minute (min)", "Hour (h)"],
+        "SI": ["Second (s)", "Minute (min)", "Hour (h)"]
     }
 }
 
