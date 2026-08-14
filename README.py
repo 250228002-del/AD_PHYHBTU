@@ -22,7 +22,7 @@ st.markdown("""
         text-align: center;
         color: white;
         font-size: 40px;
-        font-weight: 600;
+        font-weight: 400;
     }
 
     .box {
