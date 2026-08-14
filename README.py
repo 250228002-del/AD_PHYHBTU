@@ -203,7 +203,7 @@ st.markdown("</div>", unsafe_allow_html=True)
 # Conversion Logic
 # -----------------------------
 
-def convert_force(F)(value, unit):
+def convert_force((F)(value, unit)):
     if unit == "Newton (N)":
         return value * 100000, "dyne (dyn)"
     elif unit == "Kilonewton (kN)":
@@ -277,7 +277,7 @@ def convert_time(value, unit):
 
 
 if quantity == "Force(F)":
-    result, result_unit = convert_force(F)(value, selected_unit)
+    result, result_unit = convert_force((F)(value, selected_unit))
 
 elif quantity == "Energy":
     result, result_unit = convert_energy(value, selected_unit)
