@@ -312,6 +312,7 @@ elif quantity == "Time(T)":
     
 elif quantity == "Magnetic induction(B)":
     result, result_unit = convert_magnetic_induction(value, selected_unit)
+    return value / 10000, "Tesla (T)"
 
 
 # -----------------------------
