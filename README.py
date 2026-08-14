@@ -101,10 +101,10 @@ quantity = st.selectbox(
         "Force(F)",
         "Energy(E)",
         "Power(P)",
-        "Pressure",
-        "Length",
-        "Mass",
-        "Time",
+        "Pressure(p)",
+        "Length(L)",
+        "Mass(M)",
+        "Time(T)",
         "Magnetic induction(B)",
         "Magnetic field(H)",
         "Magnetization(M)",
@@ -150,22 +150,22 @@ units = {
         "SI": ["erg/second", "Kilerg/second"]
     },
 
-    "Pressure": {
+    "Pressure(p)": {
         "CGS": ["Pascal (Pa)", "Kilopascal (kPa)"],
         "SI": ["Barye (Ba)", "Kilobarye (kBa)"]
     },
 
-    "Length": {
+    "Length(L)": {
         "CGS": ["Meter (m)", "Kilometer (km)", "Centimeter (cm)"],
         "SI": ["Centimeter (cm)", "Millimeter (mm)"]
     },
 
-    "Mass": {
+    "Mass(T)": {
         "CGS": ["Kilogram (kg)", "Gram (g)"],
         "SI": ["Gram (g)", "Milligram (mg)"]
     },
 
-    "Time": {
+    "Time(T)": {
         "CGS": ["Second (s)", "Minute (min)", "Hour (h)"],
         "SI": ["Second (s)", "Minute (min)", "Hour (h)"]
     }
@@ -285,16 +285,16 @@ elif quantity == "Energy(E)":
 elif quantity == "Power(P)":
     result, result_unit = convert_power(value, selected_unit)
 
-elif quantity == "Pressure":
+elif quantity == "Pressure(p)":
     result, result_unit = convert_pressure(value, selected_unit)
 
-elif quantity == "Length":
+elif quantity == "Length(L)":
     result, result_unit = convert_length(value, selected_unit)
 
-elif quantity == "Mass":
+elif quantity == "Mass(M)":
     result, result_unit = convert_mass(value, selected_unit)
 
-elif quantity == "Time":
+elif quantity == "Time(T)":
     result, result_unit = convert_time(value, selected_unit)
 
 
