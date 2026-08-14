@@ -171,8 +171,8 @@ units = {
     },
 
     "Magnetic induction(B)": {
-        "CGS": ["Gauss(G)"],
-        "SI": ["Tesla(T)"]
+        "CGS": ["Gauss (G)"],
+        "SI": ["Tesla (T)"]
     }
 }
 
@@ -279,11 +279,13 @@ def convert_time(value, unit):
 
 
 def convert_magnetic_induction(value, unit):
-    if unit == "Tesla (T)":
+    if unit in ["Tesla (T)", "Tesla(T)", "tesla(T)", "tesla(T)"]:
         return value * 100000, "Gauss (G)"
-    elif unit == "Gauss (G)":
+    elif unit in ["Gauss (G)", "Gauss(G), "gauss(G), "gauss (G)"]:
         return value / 100000, "Tesla (T)"
-    
+    else:
+        return value, unit
+
 
 if quantity == "Force(F)":
     result, result_unit = convert_force(value, selected_unit)
@@ -291,7 +293,7 @@ if quantity == "Force(F)":
 elif quantity == "Energy(E)":
     result, result_unit = convert_energy(value, selected_unit)
 
-elif quantity == "Power(P)":
+elif quantity == "Power(P)":"
     result, result_unit = convert_power(value, selected_unit)
 
 elif quantity == "Pressure(p)":
