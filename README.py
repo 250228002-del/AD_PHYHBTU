@@ -171,8 +171,8 @@ units = {
     },
 
     "Magnetic induction(B)": {
-        "CGS": ["tesla(T)"],
-        "SI": ["gauss(G)"]
+        "CGS": ["Tesla(T)"],
+        "SI": ["Gauss(G)"]
     }
 }
 
@@ -287,7 +287,10 @@ def convert_magnetic_induction(value, unit):
         return value * 10000, "Gauss (G)"
     elif unit == "Gauss (G)":
         return value / 10000, "Tesla (T)"
-  
+    else:
+        return value, unit
+
+
 if quantity == "Force(F)":
     result, result_unit = convert_force(value, selected_unit)
 
