@@ -41,16 +41,16 @@ st.markdown("""
     }
 
     .answer {
-        border: 2px solid #d5efdc;
-        border-radius: 18px;
-        padding: 25px;
-        margin-top: 25px;
+        border: 5px solid #d5efdc;
+        border-radius: 15px;
+        padding: 15px;
+        margin-top: 20px;
         background: #f5fff7;
     }
 
     .answer-title {
         color: #3b9b59;
-        font-size: 30px;
+        font-size: 25px;
         font-weight: 700;
     }
 
