@@ -136,8 +136,8 @@ st.markdown("</div>", unsafe_allow_html=True)
 # -----------------------------
 units = {
     "Force": {
-        "SI": ["Newton (N)", "Kilonewton (kN)"],
-        "CGS": ["dyne (dyn)", "Kilodyne (kdyn)"]
+        "CGS": ["Newton (N)", "Kilonewton (kN)"],
+        "SI": ["dyne (dyn)", "Kilodyne (kdyn)"]
     },
 
     "Energy": {
