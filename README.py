@@ -287,8 +287,7 @@ def convert_magnetic_induction(value, unit):
         return value * 10000, "Gauss (G)"
     elif unit == "Gauss (G)":
         return value / 10000, "Tesla (T)"
-    else:
-        return value, unit
+    
 
 
 if quantity == "Force(F)":
