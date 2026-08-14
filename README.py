@@ -173,8 +173,98 @@ units = {
     "Magnetic induction(B)": {
         "CGS": ["Gauss (G)"],
         "SI": ["Tesla (T)"]
+    },
+
+    "Magnetic field(H)": {
+        "CGS": ["A m⁻¹"],
+        "SI": ["oersted(Oe)"]
+    },   
+
+     "Magnetization(M)": {
+        "CGS": ["A m⁻¹"],
+        "SI": ["emu cm⁻³"]
+    }, 
+
+     "Magnetic polarization(J)": {
+        "CGS": ["T"],
+        "SI": ["G(emu cm⁻³)"]
+    }, 
+
+     "Magnetic moment(m)": {
+        "CGS": ["A m²"],
+        "SI": ["emu = G cm³"]
+    }, 
+
+     "Magnetic moment per unit mass(σ)": {
+        "CGS": ["A m² kg⁻¹"],
+        "SI": ["emu g⁻¹"]
+    }, 
+
+     "Volume magnetic susceptibility(k=M/H)": {
+        "CGS": ["dimensionless"],
+        "SI": ["dimensionless"]
+    }, 
+
+     "Mass magnetic susceptibility(χ=κ/ρ)": {
+        "CGS": ["m³ kg⁻¹"],
+        "SI": ["emu Oe⁻¹ g⁻¹"]
+    }, 
+
+     "Molar magnetic susceptibility(χₘ)": {
+        "CGS": ["m³ mol⁻¹"],
+        "SI": ["emu Oe⁻¹ g⁻¹ mol⁻¹"]
+    }, 
+
+     "Magnetic permeability(μ=B/H)": {
+        "CGS": ["H m⁻¹"],
+        "SI": ["G Oe⁻¹"]
+    }, 
+
+     "Magnetic flux(Φ)": {
+        "CGS": ["Weber(Wb)"],
+        "SI": ["maxwell(Mx)"]
+    }, 
+
+     "Magnetic scalar potential;Magnetive force(φ)": {
+        "CGS": ["A"],
+        "SI": ["gilbert"]
+    }, 
+
+     "Magnetic vector potential(A)": {
+        "CGS": ["Wb m⁻¹"],
+        "SI": ["emu = G cm"]
+    }, 
+
+     "Magnetic pole strength(p)": {
+        "CGS": ["A m"],
+        "SI": ["emu = G cm²"]
+    }, 
+
+     "Demagnetizing factor(N)": {
+        "CGS": ["dimensionless"],
+        "SI": ["dimensionless"]
+    }, 
+
+     "Magnetostriction constant(λ)": {
+        "CGS": ["dimensionless"],
+        "SI": ["dimensionless"]
+    }, 
+
+     "Anisotropy constant(K,K₁,Kᵤ)": {
+        "CGS": ["J m⁻³"],
+        "SI": ["erg cm⁻³"]
+    }, 
+
+     "Magnetostatic energy(Eₘ)": {
+        "CGS": ["J m⁻³"],
+        "SI": ["erg cm⁻³"]
+    }, 
+
+     "Energy product((BH)ₘₐₓ)": {
+        "CGS": ["J m⁻³"],
+        "SI": ["erg cm⁻³"]
     }
-}
+}    
 
 # -----------------------------
 # 3. Enter Value
@@ -286,6 +376,185 @@ def convert_magnetic_induction(value, unit):
     else:
         return value, unit
 
+import math
+
+def convert_magnetic_field(value, unit):
+    if unit in ["A m^-1", "A/m", "A m−1", "Ampere per meter"]:
+        return value * (4 * math.pi * 10**-3), "Oersted (Oe)"   
+    elif unit in ["Oersted (Oe)", "Oe", "oersted (Oe)", "oersted"]:
+        return value / (4 * math.pi * 10**-3), "A m^-1"        
+    else:
+        return value, unit
+
+
+
+def convert_magnetization(value, unit):
+    if unit in ["A m^-1", "A/m", "A m−1", "Ampere per meter"]:
+        return value * 10**-3, "emu cm^-3"   
+    elif unit in ["emu cm^-3", "emu/cm^3", "emu cm−3"]:
+        return value / 10**-3, "A m^-1"      
+    else:
+        return value, unit
+
+
+
+def convert_magnetic_polarization(value, unit):
+    if unit in ["Tesla (T)", "Tesla(T)", "tesla(T)", "tesla (T)", "T"]:
+        return value * (10**4 / (4 * math.pi)), "emu cm^-3"   
+    elif unit in ["G", "Gauss (G)", "gauss(G)", "gauss (G)"]:
+        return value / (10**4 / (4 * math.pi)), "T"         
+    elif unit in ["emu cm^-3", "emu/cm^3", "emu cm−3"]:
+        return value / (10**4 / (4 * math.pi)), "T"
+    else:
+        return value, unit
+
+
+
+def convert_magnetic_moment(value, unit):
+    if unit in ["A m^2", "A/m^2", "A m²", "Am^2"]:
+        return value * 10**3, "emu"   
+    elif unit in ["emu", "EMU"]:
+        return value / 10**3, "A m^2" 
+    else:
+        return value, unit
+
+
+
+def convert_magnetic_moment_per_unit_mass(value, unit):
+    if unit in ["A m^2 kg^-1", "A m² kg⁻¹", "A m^2/kg", "A m² kg-1"]:
+return value * 10**3, "emu"   
+    elif unit in ["emu", "EMU"]:
+        return value / 10**3, "A m^2" 
+    else:
+        return value, unit
+
+
+
+def convert_magnetic_moment_per_unit_mass(value, unit):
+    if unit in ["A m^2 kg^-1", "A m² kg⁻¹", "A m^2/kg", "A m² kg-1"]:
+        return value, "emu g^-1"       
+    elif unit in ["emu g^-1", "emu/g", "emu g−1"]:
+        return value, "A m^2 kg^-1"   
+    else:
+        return value, unit
+
+
+def convert_volume_magnetic_susceptibility(value, unit):
+    if unit in ["SI", "SI unit", "dimensionless (SI)", "dimensionless"]:
+        return value * (1 / (4 * math.pi)), "cgs"   
+    elif unit in ["cgs", "CGS", "cgs unit", "dimensionless (cgs)"]:
+        return value / (1 / (4 * math.pi)), "SI"   
+    else:
+        return value, unit
+
+
+
+def convert_mass_magnetic_susceptibility(value, unit):
+    if unit in ["m^3 kg^-1", "m³ kg⁻¹", "m^3/kg", "m³/kg"]:
+        return value * (10**3 / (4 * math.pi)), "emu Oe^-1 g^-1"
+    elif unit in ["emu Oe^-1 g^-1", "emu Oe^-1/g", "emu Oe−1 g−1"]:
+        return value / (10**3 / (4 * math.pi)), "m^3 kg^-1"
+    else:
+        return value, unit
+
+
+
+def convert_molar_magnetic_susceptibility(value, unit):
+    if unit in ["m^3 mol^-1", "m³ mol⁻¹", "m^3/mol", "m³/mol"]:
+        return value * (10**6 / (4 * math.pi)), "emu Oe^-1 g^-1 mol^-1"
+    elif unit in ["emu Oe^-1 g^-1 mol^-1", "emu Oe−1 g−1 mol−1"]:
+        return value / (10**6 / (4 * math.pi)), "m^3 mol^-1"
+     else:
+        return value, unit
+
+def convert_magnetic_permeability(value, unit):
+    if unit in ["H m^-1", "H/m", "H m−1", "Henry per meter"]:
+        return value * (10**7 / (4 * math.pi)), "G Oe^-1"
+    elif unit in ["G Oe^-1", "G/Oe", "G Oe−1"]:
+        return value / (10**7 / (4 * math.pi)), "H m^-1"
+    else:
+        return value, unit
+
+
+def convert_magnetic_flux(value, unit):
+    if unit in ["Weber (Wb)", "Weber", "Wb"]:
+        return value * 10**8, "maxwell (Mx)"
+    elif unit in ["maxwell (Mx)", "Maxwell", "Mx", "maxwell"]:
+        return value / 10**8, "Weber (Wb)"
+    else:
+        return value, unit
+
+
+def convert_magnetic_scalar_potential(value, unit):
+    if unit in ["A", "Ampere", "ampere"]:
+        return value * (4 * math.pi / 10), "gilbert"
+    elif unit in ["gilbert", "Gilbert"]:
+        return value / (4 * math.pi / 10), "A"
+    else:
+        return value, unit
+
+
+def convert_magnetic_vector_potential(value, unit):
+    if unit in ["Wb m^-1", "Wb/m", "Wb m−1", "Weber per meter"]:
+        return value * 10**6, "emu"
+    elif unit in ["emu", "EMU"]:
+        return value / 10**6, "Wb m^-1"
+    else:
+        return value, unit
+
+
+def convert_magnetic_pole_strength(value, unit):
+    if unit in ["A m", "A m^-1", "A m−1"]:
+        return value * 10, "emu"
+    elif unit in ["emu", "EMU"]:
+        return value / 10, "A m"
+    else:
+        return value, unit
+
+
+def convert_demagnetizing_factor(value, unit):
+    if unit in ["SI", "SI unit", "dimensionless (SI)"]:
+        return value * (4 * math.pi), "cgs"
+    elif unit in ["cgs", "CGS", "cgs unit", "dimensionless (cgs)"]:
+        return value / (4 * math.pi), "SI"
+    else:
+        return value, unit
+
+
+def convert_magnetostriction_constant(value, unit):
+    if unit in ["SI", "SI unit", "dimensionless (SI)"]:
+        return value, "cgs"
+    elif unit in ["cgs", "CGS", "cgs unit", "dimensionless (cgs)"]:
+        return value, "SI"
+    else:
+        return value, unit
+
+
+def convert_anisotropy_constant(value, unit):
+    if unit in ["J m^-3", "J/m^3", "J m−3"]:
+        return value * 10, "erg cm^-3"
+    elif unit in ["erg cm^-3", "erg/cm^3", "erg cm−3"]:
+        return value / 10, "J m^-3"
+    else:
+        return value, unit
+
+
+def convert_magnetostatic_energy(value, unit):
+    if unit in ["J m^-3", "J/m^3", "J m−3"]:
+        return value * 10, "erg cm^-3"
+    elif unit in ["erg cm^-3", "erg/cm^3", "erg cm−3"]:
+        return value / 10, "J m^-3"
+    else:
+        return value, unit
+
+
+def convert_energy_product(value, unit):
+    if unit in ["J m^-3", "J/m^3", "J m−3"]:
+        return value * 10, "erg cm^-3"
+    elif unit in ["erg cm^-3", "erg/cm^3", "erg cm−3"]:
+        return value / 10, "J m^-3"
+    else:
+        return value, unit
 
 if quantity == "Force(F)":
     result, result_unit = convert_force(value, selected_unit)
@@ -311,7 +580,59 @@ elif quantity == "Time(T)":
 elif quantity == "Magnetic induction(B)":
     result, result_unit = convert_magnetic_induction(value, selected_unit)
     
+elif quantity == "Magnetic field(H)":
+    result, result_unit = convert_magnetic_field(value, selected_unit)
 
+elif quantity == "Magnetization(M)":
+    result, result_unit = convert_magnetization(value, selected_unit)
+
+elif quantity == "Magnetic polarization(J)":
+    result, result_unit = convert_magnetic_polarization(value, selected_unit)
+
+elif quantity == "Magnetic moment(m)":
+    result, result_unit = convert_magnetic_moment(value, selected_unit)
+
+elif quantity == "Magnetic moment per unit mass(σ)":
+    result, result_unit = convert_magnetic_moment_per_unit_mass(value, selected_unit)
+
+elif quantity == "Volume magnetic susceptibility(κ)":
+    result, result_unit = convert_volume_magnetic_susceptibility(value, selected_unit)
+
+elif quantity == "Mass magnetic susceptibility(χ)":
+    result, result_unit = convert_mass_magnetic_susceptibility(value, selected_unit)
+
+elif quantity == "Molar magnetic susceptibility(χm)":
+    result, result_unit = convert_molar_magnetic_susceptibility(value, selected_unit)
+
+elif quantity == "Magnetic permeability(μ)":
+    result, result_unit = convert_magnetic_permeability(value, selected_unit)
+
+elif quantity == "Magnetic flux(Φ)":
+    result, result_unit = convert_magnetic_flux(value, selected_unit)
+
+elif quantity == "Magnetic scalar potential(φ)":
+    result, result_unit = convert_magnetic_scalar_potential(value, selected_unit)
+
+elif quantity == "Magnetic vector potential(A)":
+    result, result_unit = convert_magnetic_vector_potential(value, selected_unit)
+
+elif quantity == "Magnetic pole strength(p)":
+    result, result_unit = convert_magnetic_pole_strength(value, selected_unit)
+
+elif quantity == "Demagnetizing factor(N)":
+    result, result_unit = convert_demagnetizing_factor(value, selected_unit)
+
+elif quantity == "Magnetostriction constant(λ)":
+    result, result_unit = convert_magnetostriction_constant(value, selected_unit)
+
+elif quantity == "Anisotropy constant(K)":
+    result, result_unit = convert_anisotropy_constant(value, selected_unit)
+
+elif quantity == "Magnetostatic energy(Em)":
+    result, result_unit = convert_magnetostatic_energy(value, selected_unit)
+
+elif quantity == "Energy product((BH)max)":
+    result, result_unit = convert_energy_product(value, selected_unit)
 
 # -----------------------------
 # 4. Answer
