@@ -48,7 +48,7 @@ st.markdown("""
 
     .answer-title {
         color: #3b9b59;
-        font-size: 25px;
+        font-size: 35px;
         font-weight: 700;
     }
 
