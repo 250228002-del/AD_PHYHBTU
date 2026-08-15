@@ -201,8 +201,8 @@ units = {
     }, 
 
      "Volume magnetic susceptibility(k=M/H)": {
-        "CGS": ["dimensionless"],
-        "SI": ["dimensionless"]
+        "CGS": ["dimensionless(SI)"],
+        "SI": ["dimensionless(CGS)"]
     }, 
 
      "Mass magnetic susceptibility(χ=κ/ρ)": {
@@ -433,10 +433,10 @@ def convert_magnetic_moment_per_unit_mass(value, unit):
 
 import math
 def convert_volume_magnetic_susceptibility(value, unit):
-    if unit in ["SI", "SI unit", "dimensionless (SI)", "dimensionless"]:
-        return value * (1 / (4 * math.pi)), "cgs"   
-    elif unit in ["cgs", "CGS", "cgs unit", "dimensionless (cgs)"]:
-        return value / (1 / (4 * math.pi)), "SI"   
+    if unit in ["SI", "SI unit", "dimensionless(SI)", "dimensionless"]:
+        return value * (1 / (4 * math.pi)), "dimensionless(CGS)"   
+    elif unit in ["cgs", "CGS", "cgs unit", "dimensionless(CGS)"]:
+        return value / (1 / (4 * math.pi)), "dimensionless(SI)"   
     else:
         return value, unit
 
