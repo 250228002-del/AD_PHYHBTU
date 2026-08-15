@@ -412,9 +412,9 @@ def convert_magnetic_polarization(value, unit):
 import math
 def convert_magnetic_moment(value, unit):
     if unit in ["A m^2", "A/m^2", "A m²", "Am^2"]:
-        return value * 10**3, "emu"   
-    elif unit in ["emu", "EMU"]:
-        return value / 10**3, "A m^2" 
+        return value * 10**3, "emu = G cm³"   
+    elif unit in ["emu = G cm³", "EMU"]:
+        return value / 10**3, "A m²" 
     else:
         return value, unit
 
