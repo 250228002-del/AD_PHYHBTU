@@ -641,10 +641,10 @@ elif quantity == "Energy product((BH)max)":
 # 4. Answer
 # -----------------------------
 st.markdown(
-    '<div class="ansewr"><div>
-    class="answer-title">4. Your answer</div>',
+    '<div class="ansewr"><div
+class="answer-title">4. Your answer</div>',
     unsafe_allow_html=True
- )
+)
  
 st.markdown(
     f"""
