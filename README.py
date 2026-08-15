@@ -379,7 +379,7 @@ def convert_magnetic_induction(value, unit):
 import math
 def convert_magnetic_field(value, unit):
     if unit in ["Oersted (Oe)", "Oe", "oersted(Oe)", "oersted"]:
-        return value / (4 * math.pi * 10**-3), "A m^-1"   
+        return value / (4 * math.pi * 10**-3), "A m⁻¹"   
     elif unit in ["A m^-1", "A/m", "A m−1", "Ampere per meter"]:
         return value * (4 * math.pi * 10**-3), "oersted(Oe)"
     else:
