@@ -504,8 +504,8 @@ def convert_magnetic_vector_potential(value, unit):
 import math
 def convert_magnetic_pole_strength(value, unit):
     if unit in ["A m", "A m^-1", "A m−1"]:
-        return value * 10, "emu"
-    elif unit in ["emu", "EMU"]:
+        return value * 10, "emu = G cm²"
+    elif unit in ["emu = G cm²", "EMU"]:
         return value / 10, "A m"
     else:
         return value, unit
