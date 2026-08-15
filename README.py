@@ -176,8 +176,8 @@ units = {
     },
 
     "Magnetic field(H)": {
-        "CGS": ["A m⁻¹"],
-        "SI": ["oersted(Oe)"]
+        "CGS": ["oerested(Oe)"],
+        "SI": ["A m⁻¹"]
     },   
 
      "Magnetization(M)": {
