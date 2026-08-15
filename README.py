@@ -389,10 +389,10 @@ def convert_magnetic_field(value, unit):
 
 import math
 def convert_magnetization(value, unit):
-    if unit in ["A m^-1", "A/m", "A m−1", "Ampere per meter"]:
-        return value * 10**-3, "emu cm^-3"   
-    elif unit in ["emu cm^-3", "emu/cm^3", "emu cm−3"]:
-        return value / 10**-3, "A m^-1"      
+    if unit in ["A m⁻¹", "A/m", "A m−1", "Ampere per meter"]:
+        return value * 10**-3, "emu cm⁻³"   
+    elif unit in ["emu cm^-3", "emu/cm^3", "emu cm⁻³"]:
+        return value / 10**-3, "A m⁻¹"      
     else:
         return value, unit
 
