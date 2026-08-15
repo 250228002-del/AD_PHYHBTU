@@ -422,7 +422,7 @@ def convert_magnetic_moment(value, unit):
 import math
 def convert_magnetic_moment_per_unit_mass(value, unit):
     if unit in ["A m² kg⁻¹", "A m² kg⁻¹", "A m^2/kg", "A m² kg-1"]:
-        return value * 10**3, "emu"   
+        return value * 10**3, "emu g⁻¹"   
     elif unit in ["emu g⁻¹", "EMU"]:
         return value / 10**3, "A m² kg⁻¹" 
     else:
