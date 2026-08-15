@@ -443,10 +443,10 @@ def convert_volume_magnetic_susceptibility(value, unit):
 
 import math
 def convert_mass_magnetic_susceptibility(value, unit):
-    if unit in ["m^3 kg^-1", "m³ kg⁻¹", "m^3/kg", "m³/kg"]:
-        return value * (10**3 / (4 * math.pi)), "emu Oe^-1 g^-1"
-    elif unit in ["emu Oe^-1 g^-1", "emu Oe^-1/g", "emu Oe−1 g−1"]:
-        return value / (10**3 / (4 * math.pi)), "m^3 kg^-1"
+    if unit in ["m³ kg⁻¹", "m³ kg⁻¹", "m^3/kg", "m³/kg"]:
+        return value * (10**3 / (4 * math.pi)), "emu Oe⁻¹ g⁻¹"
+    elif unit in ["emu Oe^-1 g^-1", "emu Oe^-1/g", "emu Oe⁻¹ g⁻¹"]:
+        return value / (10**3 / (4 * math.pi)), "m³ kg⁻¹"
     else:
         return value, unit
 
@@ -602,7 +602,7 @@ elif quantity == "Magnetic moment per unit mass(σ)":
 elif quantity == "Volume magnetic susceptibility(k=M/H)":
     result, result_unit = convert_volume_magnetic_susceptibility(value, selected_unit)
 
-elif quantity == "Mass magnetic susceptibility(χ)":
+elif quantity == "Mass magnetic susceptibility(χ=κ/ρ)":
     result, result_unit = convert_mass_magnetic_susceptibility(value, selected_unit)
 
 elif quantity == "Molar magnetic susceptibility(χm)":
