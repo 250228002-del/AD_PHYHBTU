@@ -241,8 +241,8 @@ units = {
     }, 
 
      "Demagnetizing factor(N)": {
-        "CGS": ["dimensionless"],
-        "SI": ["dimensionless"]
+        "CGS": ["dimensionless(SI)"],
+        "SI": ["dimensionless(CGS)"]
     }, 
 
      "Magnetostriction constant(λ)": {
@@ -513,10 +513,10 @@ def convert_magnetic_pole_strength(value, unit):
 
 import math
 def convert_demagnetizing_factor(value, unit):
-    if unit in ["SI", "SI unit", "dimensionless (SI)"]:
-        return value * (4 * math.pi), "cgs"
-    elif unit in ["cgs", "CGS", "cgs unit", "dimensionless (cgs)"]:
-        return value / (4 * math.pi), "SI"
+    if unit in ["SI", "SI unit", "dimensionless(SI)"]:
+        return value * (4 * math.pi), "dimensionless(cgs)"
+    elif unit in ["cgs", "CGS", "cgs unit", "dimensionless(cgs)"]:
+        return value / (4 * math.pi), "dimensionless(SI)"
     else:
         return value, unit
 
