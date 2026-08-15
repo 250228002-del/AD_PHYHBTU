@@ -641,6 +641,12 @@ elif quantity == "Energy product((BH)max)":
 # 4. Answer
 # -----------------------------
 st.markdown(
+    '<div class="ansewr"><div
+ class="answer-title">4. Your answer</div>',
+    unsafe_allow_html=True
+ )
+ 
+st.markdown(
     f"""
     <div class="result">
         {result:,.6g} &nbsp;&nbsp; {result_unit}
