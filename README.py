@@ -246,8 +246,8 @@ units = {
     }, 
 
      "Magnetostriction constant(λ)": {
-        "CGS": ["dimensionless"],
-        "SI": ["dimensionless"]
+        "CGS": ["dimensionless(SI)"],
+        "SI": ["dimensionless(CGS)"]
     }, 
 
      "Anisotropy constant(K,K₁,Kᵤ)": {
@@ -522,10 +522,10 @@ def convert_demagnetizing_factor(value, unit):
 
 import math
 def convert_magnetostriction_constant(value, unit):
-    if unit in ["SI", "SI unit", "dimensionless (SI)"]:
-        return value, "cgs"
-    elif unit in ["cgs", "CGS", "cgs unit", "dimensionless (cgs)"]:
-        return value, "SI"
+    if unit in ["SI", "SI unit", "dimensionless(SI)"]:
+        return value, "dimensionless(CGS)"
+    elif unit in ["cgs", "CGS", "cgs unit", "dimensionless(CGS)"]:
+        return value, "dimensionless(SI)"
     else:
         return value, unit
         
