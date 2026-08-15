@@ -635,9 +635,7 @@ elif quantity == "Magnetostatic energy(Em)":
 
 elif quantity == "Energy product((BH)max)":
     result, result_unit = convert_energy_product(value, selected_unit)
-else:
-    st.error("Unsupported quantity selected.")
-    st.stop()
+
 
 
 # -----------------------------
