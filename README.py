@@ -557,8 +557,6 @@ def convert_energy_product(value, unit):
         return value, unit
 
 
-result = None
-result_unit = selected_unit
 
 if quantity == "Force(F)":
     result, result_unit = convert_force(value, selected_unit)
