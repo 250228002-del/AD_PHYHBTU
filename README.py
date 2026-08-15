@@ -433,9 +433,9 @@ def convert_magnetic_moment_per_unit_mass(value, unit):
 
 import math
 def convert_volume_magnetic_susceptibility(value, unit):
-    if unit in ["SI", "SI unit", "dimensionless(SI)", "dimensionless"]:
+    if unit in ["dimensionless(SI)"]:
         return value * (1 / (4 * math.pi)), "dimensionless(CGS)"   
-    elif unit in ["cgs", "CGS", "cgs unit", "dimensionless(CGS)"]:
+    elif unit in ["dimensionless(CGS)"]:
         return value / (1 / (4 * math.pi)), "dimensionless(SI)"   
     else:
         return value, unit
