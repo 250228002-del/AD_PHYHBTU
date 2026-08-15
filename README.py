@@ -532,10 +532,10 @@ def convert_magnetostriction_constant(value, unit):
 
 import math
 def convert_anisotropy_constant(value, unit):
-    if unit in ["J m^-3", "J/m^3", "J m−3"]:
-        return value * 10, "erg cm^-3"
-    elif unit in ["erg cm^-3", "erg/cm^3", "erg cm−3"]:
-        return value / 10, "J m^-3"
+    if unit in ["J m⁻³", "J/m^3", "J m−3"]:
+        return value * 10, "erg cm⁻³"
+    elif unit in ["erg cm⁻³", "erg/cm^3", "erg cm−3"]:
+        return value / 10, "J m⁻³"
     else:
         return value, unit
         
@@ -629,7 +629,7 @@ elif quantity == "Demagnetizing factor(N)":
 elif quantity == "Magnetostriction constant(λ)":
     result, result_unit = convert_magnetostriction_constant(value, selected_unit)
 
-elif quantity == "Anisotropy constant(K)":
+elif quantity == "Anisotropy constant(K,K₁,Kᵤ)":
     result, result_unit = convert_anisotropy_constant(value, selected_unit)
 
 elif quantity == "Magnetostatic energy(Em)":
