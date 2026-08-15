@@ -556,6 +556,10 @@ def convert_energy_product(value, unit):
     else:
         return value, unit
 
+
+result = None
+result_unit = selected_unit
+
 if quantity == "Force(F)":
     result, result_unit = convert_force(value, selected_unit)
 
@@ -633,6 +637,10 @@ elif quantity == "Magnetostatic energy(Em)":
 
 elif quantity == "Energy product((BH)max)":
     result, result_unit = convert_energy_product(value, selected_unit)
+else:
+    st.error("Unsupported quantity selected.")
+    st.stop()
+
 
 # -----------------------------
 # 4. Answer
