@@ -176,7 +176,7 @@ units = {
     },
 
     "Magnetic field(H)": {
-        "CGS": ["oerested(Oe)"],
+        "CGS": ["oersted(Oe)"],
         "SI": ["A m⁻¹"]
     },   
 
