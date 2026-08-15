@@ -400,9 +400,11 @@ def convert_magnetization(value, unit):
 
 def convert_magnetic_polarization(value, unit):
     if unit in ["Tesla (T)", "Tesla(T)", "tesla(T)", "tesla (T)", "T"]:
-        return value * (10**4 / (4 * math.pi)), "G"   
+        return value * (10**4 / (4 * math.pi)), "emu cm^-3"   
     elif unit in ["G", "Gauss (G)", "gauss(G)", "gauss (G)"]:
-        return value / (10**4 / (4 * math.pi)), "T"         
+        return value / (10**4 / (4 * math.pi)), "T"           
+    elif unit in ["emu cm^-3", "emu/cm^3", "emu cm−3"]:
+        return value / (10**4 / (4 * math.pi)), "T"
     else:
         return value, unit
 
