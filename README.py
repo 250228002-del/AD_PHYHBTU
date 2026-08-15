@@ -453,10 +453,10 @@ def convert_mass_magnetic_susceptibility(value, unit):
 
 import math
 def convert_molar_magnetic_susceptibility(value, unit):
-    if unit in ["m³ kg⁻¹", "m³ mol⁻¹", "m^3/mol", "m³/mol"]:
+    if unit in ["m³ mol⁻¹", "m³ mol⁻¹", "m^3/mol", "m³/mol"]:
         return value * (10**6 / (4 * math.pi)), "emu Oe⁻¹ g⁻¹ mol⁻¹"
     elif unit in ["emu Oe^-1 g^-1 mol^-1", "emu Oe⁻¹ g⁻¹ mol⁻¹"]:
-        return value / (10**6 / (4 * math.pi)), "m³ kg⁻¹"
+        return value / (10**6 / (4 * math.pi)), "m³ mol⁻¹"
     else:
         return value, unit
 
