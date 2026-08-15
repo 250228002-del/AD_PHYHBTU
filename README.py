@@ -493,10 +493,10 @@ def convert_magnetic_scalar_potential(value, unit):
 
 import math
 def convert_magnetic_vector_potential(value, unit):
-    if unit in ["Wb m^-1", "Wb/m", "Wb m−1", "Weber per meter"]:
-        return value * 10**6, "emu"
-    elif unit in ["emu", "EMU"]:
-        return value / 10**6, "Wb m^-1"
+    if unit in ["Wb m⁻¹", "Wb/m", "Wb m−1", "Weber per meter"]:
+        return value * 10**6, "emu = G cm"
+    elif unit in ["emu = G cm", "EMU"]:
+        return value / 10**6, "Wb m⁻¹"
     else:
         return value, unit
         
