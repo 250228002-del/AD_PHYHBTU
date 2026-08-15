@@ -599,7 +599,7 @@ elif quantity == "Magnetic moment(m)":
 elif quantity == "Magnetic moment per unit mass(σ)":
     result, result_unit = convert_magnetic_moment_per_unit_mass(value, selected_unit)
 
-elif quantity == "Volume magnetic susceptibility(κ)":
+elif quantity == "Volume magnetic susceptibility(k=M/H)":
     result, result_unit = convert_volume_magnetic_susceptibility(value, selected_unit)
 
 elif quantity == "Mass magnetic susceptibility(χ)":
