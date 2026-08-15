@@ -463,10 +463,10 @@ def convert_molar_magnetic_susceptibility(value, unit):
 
 import math
 def convert_magnetic_permeability(value, unit):
-    if unit in ["H m^-1", "H/m", "H m−1", "Henry per meter"]:
-        return value * (10**7 / (4 * math.pi)), "G Oe^-1"
-    elif unit in ["G Oe^-1", "G/Oe", "G Oe−1"]:
-        return value / (10**7 / (4 * math.pi)), "H m^-1"
+    if unit in ["H m⁻¹", "H/m", "H m−1", "Henry per meter"]:
+        return value * (10**7 / (4 * math.pi)), "G Oe⁻¹"
+    elif unit in ["G Oe⁻¹", "G/Oe", "G Oe−1"]:
+        return value / (10**7 / (4 * math.pi)), "H m⁻¹"
     else:
         return value, unit
         
@@ -608,7 +608,7 @@ elif quantity == "Mass magnetic susceptibility(χ=κ/ρ)":
 elif quantity == "Molar magnetic susceptibility(χₘ)":
     result, result_unit = convert_molar_magnetic_susceptibility(value, selected_unit)
 
-elif quantity == "Magnetic permeability(μ)":
+elif quantity == "Magnetic permeability(μ=B/H)":
     result, result_unit = convert_magnetic_permeability(value, selected_unit)
 
 elif quantity == "Magnetic flux(Φ)":
