@@ -187,7 +187,7 @@ units = {
 
      "Magnetic polarization(J)": {
         "CGS": ["T"],
-        "SI": ["G(emu cm⁻³)"]
+        "SI": ["(emu cm⁻³)"]
     }, 
 
      "Magnetic moment(m)": {
