@@ -421,22 +421,15 @@ def convert_magnetic_moment(value, unit):
 
 import math
 def convert_magnetic_moment_per_unit_mass(value, unit):
-    if unit in ["A m^2 kg^-1", "A m² kg⁻¹", "A m^2/kg", "A m² kg-1"]:
+    if unit in ["A m² kg⁻¹", "A m² kg⁻¹", "A m^2/kg", "A m² kg-1"]:
         return value * 10**3, "emu"   
-    elif unit in ["emu", "EMU"]:
-        return value / 10**3, "A m^2" 
+    elif unit in ["emu g⁻¹", "EMU"]:
+        return value / 10**3, "A m² kg⁻¹" 
     else:
         return value, unit
 
 
-import math
-def convert_magnetic_moment_per_unit_mass(value, unit):
-    if unit in ["A m^2 kg^-1", "A m² kg⁻¹", "A m^2/kg", "A m² kg-1"]:
-        return value, "emu g^-1"       
-    elif unit in ["emu g^-1", "emu/g", "emu g−1"]:
-        return value, "A m^2 kg^-1"   
-    else:
-        return value, unit
+
 
 import math
 def convert_volume_magnetic_susceptibility(value, unit):
