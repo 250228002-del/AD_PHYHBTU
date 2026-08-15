@@ -614,7 +614,7 @@ elif quantity == "Magnetic permeability(μ=B/H)":
 elif quantity == "Magnetic flux(Φ)":
     result, result_unit = convert_magnetic_flux(value, selected_unit)
 
-elif quantity == "Magnetic scalar potential(φ)":
+elif quantity == "Magnetic scalar potential;Magnetive force(φ)":
     result, result_unit = convert_magnetic_scalar_potential(value, selected_unit)
 
 elif quantity == "Magnetic vector potential(A)":
