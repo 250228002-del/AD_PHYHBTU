@@ -377,8 +377,6 @@ def convert_magnetic_induction(value, unit):
         return value, unit
 
 import math
-
-# 2. Magnetic field
 def convert_magnetic_field(value, unit):
     if unit in ["A m^-1", "A/m", "A m−1", "Ampere per meter"]:
         return value * (4 * math.pi * 10**-3), "Oersted (Oe)"   # 4π × 10^-3 = 0.012566370614359
@@ -389,7 +387,7 @@ def convert_magnetic_field(value, unit):
 
 
 
-
+import math
 def convert_magnetization(value, unit):
     if unit in ["A m^-1", "A/m", "A m−1", "Ampere per meter"]:
         return value * 10**-3, "emu cm^-3"   
@@ -399,7 +397,7 @@ def convert_magnetization(value, unit):
         return value, unit
 
 
-
+import math
 def convert_magnetic_polarization(value, unit):
     if unit in ["Tesla (T)", "Tesla(T)", "tesla(T)", "tesla (T)", "T"]:
         return value * (10**4 / (4 * math.pi)), "emu cm^-3"   
@@ -411,7 +409,7 @@ def convert_magnetic_polarization(value, unit):
         return value, unit
 
 
-
+import math
 def convert_magnetic_moment(value, unit):
     if unit in ["A m^2", "A/m^2", "A m²", "Am^2"]:
         return value * 10**3, "emu"   
@@ -421,7 +419,7 @@ def convert_magnetic_moment(value, unit):
         return value, unit
 
 
-
+import math
 def convert_magnetic_moment_per_unit_mass(value, unit):
     if unit in ["A m^2 kg^-1", "A m² kg⁻¹", "A m^2/kg", "A m² kg-1"]:
         return value * 10**3, "emu"   
@@ -431,7 +429,7 @@ def convert_magnetic_moment_per_unit_mass(value, unit):
         return value, unit
 
 
-
+import math
 def convert_magnetic_moment_per_unit_mass(value, unit):
     if unit in ["A m^2 kg^-1", "A m² kg⁻¹", "A m^2/kg", "A m² kg-1"]:
         return value, "emu g^-1"       
@@ -440,7 +438,7 @@ def convert_magnetic_moment_per_unit_mass(value, unit):
     else:
         return value, unit
 
-
+import math
 def convert_volume_magnetic_susceptibility(value, unit):
     if unit in ["SI", "SI unit", "dimensionless (SI)", "dimensionless"]:
         return value * (1 / (4 * math.pi)), "cgs"   
@@ -450,7 +448,7 @@ def convert_volume_magnetic_susceptibility(value, unit):
         return value, unit
 
 
-
+import math
 def convert_mass_magnetic_susceptibility(value, unit):
     if unit in ["m^3 kg^-1", "m³ kg⁻¹", "m^3/kg", "m³/kg"]:
         return value * (10**3 / (4 * math.pi)), "emu Oe^-1 g^-1"
@@ -460,7 +458,7 @@ def convert_mass_magnetic_susceptibility(value, unit):
         return value, unit
 
 
-
+import math
 def convert_molar_magnetic_susceptibility(value, unit):
     if unit in ["m^3 mol^-1", "m³ mol⁻¹", "m^3/mol", "m³/mol"]:
         return value * (10**6 / (4 * math.pi)), "emu Oe^-1 g^-1 mol^-1"
@@ -469,6 +467,8 @@ def convert_molar_magnetic_susceptibility(value, unit):
     else:
         return value, unit
 
+
+import math
 def convert_magnetic_permeability(value, unit):
     if unit in ["H m^-1", "H/m", "H m−1", "Henry per meter"]:
         return value * (10**7 / (4 * math.pi)), "G Oe^-1"
@@ -476,8 +476,9 @@ def convert_magnetic_permeability(value, unit):
         return value / (10**7 / (4 * math.pi)), "H m^-1"
     else:
         return value, unit
+        
 
-
+import math
 def convert_magnetic_flux(value, unit):
     if unit in ["Weber (Wb)", "Weber", "Wb"]:
         return value * 10**8, "maxwell (Mx)"
@@ -485,8 +486,9 @@ def convert_magnetic_flux(value, unit):
         return value / 10**8, "Weber (Wb)"
     else:
         return value, unit
+        
 
-
+import math
 def convert_magnetic_scalar_potential(value, unit):
     if unit in ["A", "Ampere", "ampere"]:
         return value * (4 * math.pi / 10), "gilbert"
@@ -494,8 +496,9 @@ def convert_magnetic_scalar_potential(value, unit):
         return value / (4 * math.pi / 10), "A"
     else:
         return value, unit
+        
 
-
+import math
 def convert_magnetic_vector_potential(value, unit):
     if unit in ["Wb m^-1", "Wb/m", "Wb m−1", "Weber per meter"]:
         return value * 10**6, "emu"
@@ -503,8 +506,9 @@ def convert_magnetic_vector_potential(value, unit):
         return value / 10**6, "Wb m^-1"
     else:
         return value, unit
+        
 
-
+import math
 def convert_magnetic_pole_strength(value, unit):
     if unit in ["A m", "A m^-1", "A m−1"]:
         return value * 10, "emu"
@@ -512,8 +516,9 @@ def convert_magnetic_pole_strength(value, unit):
         return value / 10, "A m"
     else:
         return value, unit
+        
 
-
+import math
 def convert_demagnetizing_factor(value, unit):
     if unit in ["SI", "SI unit", "dimensionless (SI)"]:
         return value * (4 * math.pi), "cgs"
@@ -522,7 +527,7 @@ def convert_demagnetizing_factor(value, unit):
     else:
         return value, unit
 
-
+import math
 def convert_magnetostriction_constant(value, unit):
     if unit in ["SI", "SI unit", "dimensionless (SI)"]:
         return value, "cgs"
@@ -530,8 +535,9 @@ def convert_magnetostriction_constant(value, unit):
         return value, "SI"
     else:
         return value, unit
+        
 
-
+import math
 def convert_anisotropy_constant(value, unit):
     if unit in ["J m^-3", "J/m^3", "J m−3"]:
         return value * 10, "erg cm^-3"
@@ -539,8 +545,9 @@ def convert_anisotropy_constant(value, unit):
         return value / 10, "J m^-3"
     else:
         return value, unit
+        
 
-
+import math
 def convert_magnetostatic_energy(value, unit):
     if unit in ["J m^-3", "J/m^3", "J m−3"]:
         return value * 10, "erg cm^-3"
@@ -548,8 +555,9 @@ def convert_magnetostatic_energy(value, unit):
         return value / 10, "J m^-3"
     else:
         return value, unit
+        
 
-
+import math
 def convert_energy_product(value, unit):
     if unit in ["J m^-3", "J/m^3", "J m−3"]:
         return value * 10, "erg cm^-3"
