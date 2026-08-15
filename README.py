@@ -473,10 +473,10 @@ def convert_magnetic_permeability(value, unit):
 
 import math
 def convert_magnetic_flux(value, unit):
-    if unit in ["Weber (Wb)", "Weber", "Wb"]:
-        return value * 10**8, "maxwell (Mx)"
-    elif unit in ["maxwell (Mx)", "Maxwell", "Mx", "maxwell"]:
-        return value / 10**8, "Weber (Wb)"
+    if unit in ["Weber(Wb)", "Weber", "Wb"]:
+        return value * 10**8, "maxwell(Mx)"
+    elif unit in ["maxwell(Mx)", "Maxwell", "Mx", "maxwell"]:
+        return value / 10**8, "Weber(Wb)"
     else:
         return value, unit
         
