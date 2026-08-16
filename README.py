@@ -171,8 +171,8 @@ units = {
     },
 
     "Magnetic induction(B)": {
-        "CGS": ["Gauss (G)"],
-        "SI": ["Tesla (T)"]
+        "CGS": ["Tesla (T)"],
+        "SI": ["Gauss (G)"]
     },
 
     "Magnetic field(H)": {
