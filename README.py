@@ -66,7 +66,7 @@ st.markdown("""
 
 select,
 select option {
-    font-size: 22px !important;
+    font-size: 22sp !important;
 }
 
 
