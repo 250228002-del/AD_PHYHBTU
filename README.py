@@ -1,4 +1,5 @@
 import streamlit as st
+import re
 st.set_page_config(
     page_title="Unit Converter",
     layout="wide"
@@ -88,6 +89,9 @@ div[data-testid="stNumberInput"] input {
     font-size: 24px !important;
 }
 
+div[data-testid="stTextInput"] input {
+    font-size: 24px !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -337,11 +341,41 @@ st.markdown(
 col1, col2 = st.columns(2)
 
 with col1:
-    value = st.number_input(
-        "Value",
-        value=50.0,
-        label_visibility="collapsed"
+    value_input = st.text_input(
+    "Value",
+    value="50",
+    label_visibility="collapsed"
+)
+
+def parse_scientific(value_str):
+    s = value_str.strip()
+
+    superscript = str.maketrans(
+        "⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺",
+        "0123456789-+"
     )
+    s = s.translate(superscript)
+
+    s = s.replace("×", "x").replace("X", "x")
+
+    match = re.fullmatch(
+        r"\s*([+-]?\d*\.?\d+)\s*x\s*10\s*\^?\s*([+-]?\d+)\s*",
+        s
+    )
+
+    if match:
+        base = float(match.group(1))
+        exponent = int(match.group(2))
+        return base * (10 ** exponent)
+
+    return float(s)
+
+
+try:
+    value = parse_scientific(value_input)
+except ValueError:
+    st.error("Example: 5 × 10⁹  or  5 × 10⁻⁹")
+    st.stop()
 
 with col2:
     unit_list = units[quantity][system]
@@ -714,7 +748,6 @@ elif quantity == "Energy product((BH)ₘₐₓ)":
 # --A_D_N_A_N____A_H_M_A_D_ _ _
 
 
-import re
 
 def format_scientific(value):
     s = f"{value:.6g}"
