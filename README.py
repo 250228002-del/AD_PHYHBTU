@@ -4,9 +4,13 @@ st.set_page_config(
     layout="wide"
 )
 
-# -----------------------------
+# A_D_N_A_N____A_H_M_A_D_ _ _
+
+
 # CSS - App Design
-# -----------------------------
+
+
+# -A_D_N_A_N____A_H_M_A_D_ _ _
 st.markdown("""
 <style>
     .stApp {
@@ -61,18 +65,29 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# -----------------------------
+# A_D_N_A_N____A_H_M_A_D_ _ _
+
+
 # Header
-# -----------------------------
+
+
+# -A_D_N_A_N____A_H_M_A_D_ _ _
+
 st.markdown(
     '<div class="topbar">☰ &nbsp;&nbsp;&nbsp; Unit Converter &nbsp;&nbsp;&nbsp; </div>',
     unsafe_allow_html=True
 )
 
 
-# -----------------------------
+# --A_D_N_A_N____A_H_M_A_D_ _ _
+
+
 # 1. Convert in
-# -----------------------------
+
+
+# --A_D_N_A_N____A_H_M_A_D_ _ _
+
+
 st.markdown(
     '<div class="box"><div class="heading">1. Convert in</div>',
     unsafe_allow_html=True
@@ -87,9 +102,15 @@ system = st.selectbox(
 st.markdown("</div>", unsafe_allow_html=True)
 
 
-# -----------------------------
+# A_D_N_A_N____A_H_M_A_D_ _ _
+
+
 # 2. Physical Quantity
-# -----------------------------
+
+
+# A_D_N_A_N____A_H_M_A_D_ _ _
+
+
 st.markdown(
     '<div class="box"><div class="heading">2. Physical Quantity</div>',
     unsafe_allow_html=True
@@ -131,9 +152,15 @@ quantity = st.selectbox(
 st.markdown("</div>", unsafe_allow_html=True)
 
 
-# -----------------------------
+# -A_D_N_A_N____A_H_M_A_D_ _ _
+
+
 # Units
-# -----------------------------
+
+
+# --A_D_N_A_N____A_H_M_A_D_ _ _
+
+
 units = {
     "Force(F)": {
         "CGS": ["Newton (N)"],
@@ -266,9 +293,15 @@ units = {
     }
 }    
 
-# -----------------------------
+# -A_D_N_A_N____A_H_M_A_D_ _ _
+
+
 # 3. Enter Value
-# -----------------------------
+
+
+# A_D_N_A_N____A_H_M_A_D_ _ _
+
+
 st.markdown(
     '<div class="box"><div class="heading">3. Enter value</div>',
     unsafe_allow_html=True
@@ -295,9 +328,14 @@ with col2:
 st.markdown("</div>", unsafe_allow_html=True)
 
 
-# -----------------------------
+# -A_D_N_A_N____A_H_M_A_D_ _ _
+
+
 # Conversion Logic
-# -----------------------------
+
+
+# -A_D_N_A_N____A_H_M_A_D_ _ _
+
 
 def convert_force(value, unit):
     if unit == "Newton (N)":
@@ -640,9 +678,15 @@ elif quantity == "Energy product((BH)ₘₐₓ)":
 
 
 
-# -----------------------------
-# 4. Answer
-# -----------------------------
+# -A_D_N_A_N____A_H_M_A_D_ _ _
+
+
+# 4.Answer
+
+
+# --A_D_N_A_N____A_H_M_A_D_ _ _
+
+
 import re
 
 def format_scientific(value):
