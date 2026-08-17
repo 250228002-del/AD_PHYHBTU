@@ -64,6 +64,11 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+select,
+select option {
+    font-size: 22px !important;
+}
+
 
 # A_D_N_A_N____A_H_M_A_D_ _ _
 
