@@ -160,7 +160,7 @@ units = {
         "SI": ["Centimeter (cm)", "Millimeter (mm)"]
     },
 
-    "Mass(T)": {
+    "Mass(M)": {
         "CGS": ["Kilogram (kg)", "Gram (g)"],
         "SI": ["Gram (g)", "Milligram (mg)"]
     },
