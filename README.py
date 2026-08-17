@@ -69,13 +69,22 @@ import streamlit as st
 
 st.markdown("""
 <style>
-.stSelectbox div[data-baseweb="select"] * {
+
+/* Dropdown ke andar selected value */
+.stSelectbox div[data-baseweb="select"] div {
     font-size: 22px !important;
 }
 
+/* Dropdown kholne par options */
 div[role="option"] {
     font-size: 22px !important;
 }
+
+/* Selectbox ka text */
+.stSelectbox [data-baseweb="select"] {
+    font-size: 22px !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
