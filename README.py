@@ -643,6 +643,16 @@ elif quantity == "Energy product((BH)ₘₐₓ)":
 # -----------------------------
 # 4. Answer
 # -----------------------------
+import re
+
+def format_scientific(value):
+    s = f"{value:.6g}"
+    if "e" in s.lower():
+        mantissa, exponent = re.split("[eE]", s)
+        exponent = int(exponent)
+        return f"{mantissa}×10<sup>{exponent}</sup>"
+    return s
+    
 st.markdown(
     """<div class="ansewr"><div
 class="answer-title">4. Your answer</div>""",
@@ -652,7 +662,7 @@ class="answer-title">4. Your answer</div>""",
 st.markdown(
     f"""
     <div class="result">
-        {result:,.6g} &nbsp;&nbsp; {result_unit}
+        {format_scientific(result)} &nbsp;&nbsp; {result_unit}
     </div>
     """,
     unsafe_allow_html=True
