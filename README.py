@@ -83,6 +83,11 @@ div[role="option"] * {
     font-size: 24px !important;
 }
 
+/* Numerical value */
+div[data-testid="stNumberInput"] input {
+    font-size: 24px !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 
