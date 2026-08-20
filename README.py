@@ -613,8 +613,8 @@ def convert_magnetic_pole_strength(value, unit):
 import math
 def convert_demagnetizing_factor(value, unit):
     if unit in ["SI", "SI unit", "dimensionless(SI)"]:
-        return value * (4 * math.pi), "dimensionless(cgs)"
-    elif unit in ["cgs", "CGS", "cgs unit", "dimensionless(cgs)"]:
+        return value * (4 * math.pi), "dimensionless(CGS)"
+    elif unit in ["cgs", "CGS", "cgs unit", "dimensionless(CGS)"]:
         return value / (4 * math.pi), "dimensionless(SI)"
     else:
         return value, unit
